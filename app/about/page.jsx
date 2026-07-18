@@ -33,7 +33,7 @@ export default function About() {
       <Hero
         page
         actions={false}
-        image="/images/sky-burjalarab.jpg"
+        image="/images/sky-marina.jpg"
         eyebrow="About First Key International"
         title="Property decisions made easier, with honest experts beside you"
         sub="A Dubai-based brokerage built on a simple idea: the market rewards knowledge and clear thinking — so we lead with both."
@@ -72,7 +72,12 @@ export default function About() {
       </section>
 
       {/* Mission */}
-      <section className="section bg-navy">
+      <section className="section devband devband--center">
+        <div className="devband__media">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/sky-d.jpg" alt="" loading="lazy" />
+        </div>
+        <div className="devband__wash" />
         <div className="container">
           <Reveal>
             <SectionHead
@@ -130,7 +135,7 @@ export default function About() {
           </Reveal>
           <Reveal delay={120} className="split__media">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/sky-jbr.jpg" alt="Dubai Marina and JBR skyline" />
+            <img src="/images/dubai-b.jpg" alt="A First Key residence" />
           </Reveal>
         </div>
       </section>
@@ -139,7 +144,7 @@ export default function About() {
         eyebrow="Get started"
         title="Want brokers who put your goals first?"
         text="Meet the First Key team and get started with a clear plan."
-        image="/images/sky-marina-towers.jpg"
+        image="/images/sky-towers.jpg"
       />
     </>
   );

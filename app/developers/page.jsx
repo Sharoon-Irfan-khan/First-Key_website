@@ -16,7 +16,7 @@ export default function Developers() {
       <Hero
         page
         actions={false}
-        image="/images/sky-marina.jpg"
+        image="/images/sky-a.jpg"
         eyebrow="Developers"
         title="Dubai's leading property developers, one local broker"
         sub="Dubai's skyline is shaped by developers known for quality and delivery. We connect you with property from these names — ready homes and off-plan, in one place."

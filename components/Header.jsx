@@ -89,6 +89,14 @@ export default function Header() {
       </header>
 
       <div className={`mobile-menu ${open ? "is-open" : ""}`}>
+        <Link
+          href="/"
+          className="mobile-menu__brand"
+          onClick={() => setOpen(false)}
+        >
+          <Image src="/images/emblem-white.png" alt="" width={34} height={34} />
+          <b>First Key International</b>
+        </Link>
         <button
           className="mobile-menu__close"
           onClick={() => setOpen(false)}

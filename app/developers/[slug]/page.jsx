@@ -102,7 +102,7 @@ export default function DeveloperPage({ params }) {
         eyebrow={`Enquire about ${d.name}`}
         title="Ready to see these projects in detail?"
         text="Speak with a First Key broker for floor plans, payment plans, and the latest availability — with honest comparisons across every developer."
-        image="/images/sky-downtown.jpg"
+        image="/images/sky-b.jpg"
       />
     </>
   );

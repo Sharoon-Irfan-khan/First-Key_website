@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Eyebrow } from "./ui";
 import { Arrow } from "./icons";
+import CountUp from "./CountUp";
 
 export default function Hero({
   image,
@@ -38,7 +39,9 @@ export default function Hero({
           <div className="hero__stats">
             {stats.map((s) => (
               <div className="stat" key={s.label}>
-                <b>{s.value}</b>
+                <b>
+                  <CountUp value={s.value} />
+                </b>
                 <span>{s.label}</span>
               </div>
             ))}

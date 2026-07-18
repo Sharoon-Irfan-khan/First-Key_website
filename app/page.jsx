@@ -51,7 +51,7 @@ export default function Home() {
   return (
     <>
       <Hero
-        image="/images/sky-downtown.jpg"
+        image="/images/sky-jbr2.jpg"
         eyebrow="First Key International · Dubai"
         title="Real estate brokers in Dubai who deliver"
         sub="We help you buy, sell, and lease property across Dubai and the wider UAE — simplifying every step, from your first viewing to the final handover."
@@ -122,7 +122,12 @@ export default function Home() {
       </section>
 
       {/* Developers strip */}
-      <section className="section bg-navy">
+      <section className="section-tight devband">
+        <div className="devband__media">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/sky-marina-towers.jpg" alt="" loading="lazy" />
+        </div>
+        <div className="devband__wash" />
         <div className="container">
           <Reveal>
             <SectionHead
