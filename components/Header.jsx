@@ -18,11 +18,13 @@ export default function Header() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const onScroll = () => setSolid(window.scrollY > 40);
+    // Pages with a full-bleed dark hero start transparent; others stay solid.
+    const hasHero = !!document.querySelector(".hero");
+    const onScroll = () => setSolid(!hasHero || window.scrollY > 40);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
     setOpen(false);

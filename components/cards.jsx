@@ -32,8 +32,9 @@ export function PropertyCard({ p }) {
 }
 
 export function DeveloperCard({ d, index }) {
+  const count = d.projectCount ?? (d.projects ? d.projects.length : 0);
   return (
-    <article className="devcard">
+    <Link href={`/developers/${d.slug}`} className="devcard">
       <div className="devcard__media">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={d.image} alt="" loading="lazy" />
@@ -54,14 +55,35 @@ export function DeveloperCard({ d, index }) {
           )}
           {d.from && <div className="devcard__sep" />}
           <div className="devcard__stat">
-            <b>{d.projects}</b>
+            <b>{count}</b>
             <span>Live projects</span>
           </div>
-          <Link href="/contact" className="link-arrow">
+          <span className="link-arrow">
             View projects <Arrow />
-          </Link>
+          </span>
         </div>
       </div>
-    </article>
+    </Link>
+  );
+}
+
+export function ProjectCard({ p }) {
+  return (
+    <Link href={p.href || "/contact"} className="pjcard">
+      <div className="pjcard__media">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={p.image} alt={p.name} loading="lazy" />
+      </div>
+      <div className="pjcard__body">
+        <h3>{p.name}</h3>
+        {p.community && <p className="pjcard__loc">{p.community}</p>}
+        <div className="pjcard__foot">
+          <strong className="pjcard__price">{p.price}</strong>
+          <span className="link-arrow">
+            View details <Arrow />
+          </span>
+        </div>
+      </div>
+    </Link>
   );
 }
