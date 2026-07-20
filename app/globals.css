@@ -623,8 +623,10 @@ em {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* dim the photo so the headline and stats stay legible */
+  opacity: 0.62;
 }
-/* inner page headers: dim the photo so the headline stays legible */
+/* inner page headers carry more text, so dim a little further */
 .hero--page .hero__media img {
   opacity: 0.5;
 }
@@ -1337,6 +1339,13 @@ em {
   color: rgba(255, 255, 255, 0.78);
 }
 @media (max-width: 760px) {
+  /* narrow screens put the copy over the busiest part of the photo */
+  .hero__media img {
+    opacity: 0.5;
+  }
+  .hero--page .hero__media img {
+    opacity: 0.42;
+  }
   .devband__wash {
     background: linear-gradient(
       rgba(4, 20, 40, 0.84),
