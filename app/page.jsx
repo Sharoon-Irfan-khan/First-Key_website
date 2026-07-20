@@ -67,7 +67,12 @@ export default function Home() {
         <div className="container split">
           <Reveal className="split__media">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/dubai-c.jpg" alt="A luxury villa managed by First Key" />
+            <img
+              src="/images/jbr-bluewaters.jpg"
+              alt="Bluewaters Island and Ain Dubai seen across JBR beach"
+              loading="lazy"
+              decoding="async"
+            />
             <div className="badge">
               <b>1:1</b>
               <span>A dedicated broker on every deal</span>

@@ -823,7 +823,10 @@ em {
 }
 .split__media img {
   width: 100%;
-  height: 100%;
+  height: auto;
+  /* fixed crop box so the photo reads the same at every width — and so the
+     browser reserves the space before the image loads */
+  aspect-ratio: 4 / 3;
   min-height: 320px;
   object-fit: cover;
   border-radius: 12px;
@@ -2022,6 +2025,10 @@ em {
   }
   .split__media .badge {
     left: 12px;
+  }
+  /* let the 4:3 crop govern on phones instead of a fixed floor */
+  .split__media img {
+    min-height: 0;
   }
 }
 

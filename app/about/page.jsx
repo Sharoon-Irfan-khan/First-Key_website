@@ -44,7 +44,12 @@ export default function About() {
         <div className="container split split--media-right">
           <Reveal className="split__media">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/dubai-d.jpg" alt="A First Key residence at dusk" />
+            <img
+              src="/images/palm-jumeirah-aerial.jpg"
+              alt="Aerial view along Palm Jumeirah at sunset, Dubai"
+              loading="lazy"
+              decoding="async"
+            />
             <div className="badge">
               <b>10+</b>
               <span>Years of combined industry experience</span>
@@ -135,7 +140,12 @@ export default function About() {
           </Reveal>
           <Reveal delay={120} className="split__media">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/dubai-b.jpg" alt="A First Key residence" />
+            <img
+              src="/images/palm-pointe-boardwalk.jpg"
+              alt="The waterfront boardwalk at The Pointe, Palm Jumeirah"
+              loading="lazy"
+              decoding="async"
+            />
           </Reveal>
         </div>
       </section>
