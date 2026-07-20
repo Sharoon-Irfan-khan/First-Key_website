@@ -616,11 +616,17 @@ em {
   position: absolute;
   inset: 0;
   z-index: -2;
+  /* dark base the image sits on, so lowering its opacity reads as a dim */
+  background: #061426;
 }
 .hero__media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+/* inner page headers: dim the photo so the headline stays legible */
+.hero--page .hero__media img {
+  opacity: 0.5;
 }
 .hero__wash {
   position: absolute;

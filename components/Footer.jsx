@@ -61,10 +61,20 @@ export default function Footer() {
             <a href="https://wa.me/971545011151" aria-label="WhatsApp" target="_blank" rel="noreferrer">
               <WhatsApp />
             </a>
-            <a href="#" aria-label="LinkedIn">
+            <a
+              href="https://www.linkedin.com/company/firstkeyinternationalrealestate/"
+              aria-label="LinkedIn"
+              target="_blank"
+              rel="noreferrer"
+            >
               <IconLinkedin />
             </a>
-            <a href="#" aria-label="Instagram">
+            <a
+              href="https://www.instagram.com/firstkeyint"
+              aria-label="Instagram"
+              target="_blank"
+              rel="noreferrer"
+            >
               <IconInstagram />
             </a>
           </div>
