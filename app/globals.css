@@ -705,18 +705,22 @@ em {
 }
 .hero__stats .stat b {
   font-family: var(--font-display);
-  font-size: clamp(2.1rem, 3.5vw, 3rem);
-  font-weight: 500;
+  font-size: clamp(2.9rem, 5vw, 4.4rem);
+  font-weight: 600;
   display: block;
   line-height: 1;
+  /* Cormorant defaults to old-style figures, which sit at x-height and read as
+     tiny next to the uppercase labels — force full-height lining figures. */
+  font-variant-numeric: lining-nums;
+  font-feature-settings: "lnum" 1, "onum" 0;
 }
 .hero__stats .stat span {
   display: block;
-  margin-top: 10px;
-  font-size: 0.74rem;
-  letter-spacing: 0.16em;
+  margin-top: 12px;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.78);
 }
 
 .scroll-cue {
@@ -859,10 +863,12 @@ em {
 }
 .split__media .badge b {
   font-family: var(--font-display);
-  font-size: 2.4rem;
-  font-weight: 500;
+  font-size: 2.9rem;
+  font-weight: 600;
   display: block;
   line-height: 1;
+  font-variant-numeric: lining-nums;
+  font-feature-settings: "lnum" 1, "onum" 0;
 }
 .split__media .badge span {
   font-size: 0.72rem;
@@ -983,11 +989,13 @@ em {
 }
 .statband .stat b {
   font-family: var(--font-display);
-  font-size: clamp(2.6rem, 4.5vw, 3.8rem);
-  font-weight: 500;
+  font-size: clamp(3rem, 5.2vw, 4.6rem);
+  font-weight: 600;
   display: block;
   line-height: 1;
   color: var(--blue);
+  font-variant-numeric: lining-nums;
+  font-feature-settings: "lnum" 1, "onum" 0;
 }
 .bg-navy .statband .stat b {
   color: #fff;

@@ -51,7 +51,7 @@ export default function Contact() {
               </span>
               <div>
                 <h4>Office</h4>
-                <p>Dubai, United Arab Emirates</p>
+                <p>Office 25-21, The Exchange Tower, Business Bay, Dubai</p>
               </div>
             </div>
             <div className="contact-item">
@@ -78,7 +78,7 @@ export default function Contact() {
             <div className="map">
               <iframe
                 title="First Key International — Dubai"
-                src="https://www.google.com/maps?q=Dubai%2C%20United%20Arab%20Emirates&output=embed"
+                src="https://www.google.com/maps?q=The%20Exchange%20Tower%2C%20Business%20Bay%2C%20Dubai&output=embed"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />

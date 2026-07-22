@@ -51,7 +51,7 @@ export default function Footer() {
             <h4>Get in touch</h4>
             <a href="tel:+971545011151">+971 54 501 1151</a>
             <a href="mailto:info@firstkeyint.com">info@firstkeyint.com</a>
-            <p>Dubai, United Arab Emirates</p>
+            <p>Office 25-21, The Exchange Tower, Business Bay, Dubai</p>
             <p>Mon–Fri · 9:00 AM – 6:00 PM</p>
           </div>
         </div>
