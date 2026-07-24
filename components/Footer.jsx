@@ -34,14 +34,16 @@ export default function Footer() {
             <Link href="/">Home</Link>
             <Link href="/about">About</Link>
             <Link href="/developers">Developers</Link>
+            <Link href="/list-property">List Your Property</Link>
             <Link href="/blogs">Blogs</Link>
+            <Link href="/careers">Careers</Link>
             <Link href="/contact">Contact</Link>
           </div>
 
           <div className="footer__col">
             <h4>Services</h4>
             <Link href="/contact">Buying</Link>
-            <Link href="/contact">Selling</Link>
+            <Link href="/list-property">Selling</Link>
             <Link href="/contact">Leasing</Link>
             <Link href="/contact">Commercial</Link>
             <Link href="/developers">Off-Plan</Link>
@@ -51,6 +53,7 @@ export default function Footer() {
             <h4>Get in touch</h4>
             <a href="tel:+971545011151">+971 54 501 1151</a>
             <a href="mailto:info@firstkeyint.com">info@firstkeyint.com</a>
+            <a href="mailto:careers@firstkeyint.com">careers@firstkeyint.com</a>
             <p>Office 25-21, The Exchange Tower, Business Bay, Dubai</p>
             <p>Mon–Fri · 9:00 AM – 6:00 PM</p>
           </div>

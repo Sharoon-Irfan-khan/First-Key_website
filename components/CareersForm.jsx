@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Arrow } from "./icons";
 
-export default function ContactForm() {
+export default function CareersForm() {
   const [sent, setSent] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -15,7 +15,7 @@ export default function ContactForm() {
     const form = e.currentTarget;
     const payload = Object.fromEntries(new FormData(form).entries());
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("/api/careers", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -33,12 +33,12 @@ export default function ContactForm() {
   if (sent) {
     return (
       <div className="form" role="status">
-        <h3 style={{ fontSize: "1.7rem" }}>Thank you — message received.</h3>
+        <h3 style={{ fontSize: "1.7rem" }}>Thank you — application received.</h3>
         <p style={{ marginTop: "14px" }}>
-          A First Key broker will reply with clear next steps and the right
-          options for you. For anything urgent, call us on{" "}
-          <a href="tel:+971545011151" style={{ color: "var(--blue)" }}>
-            +971 54 501 1151
+          Our team will review your details and reach out if there's a strong
+          fit. To attach your CV, email it to{" "}
+          <a href="mailto:careers@firstkeyint.com" style={{ color: "var(--blue)" }}>
+            careers@firstkeyint.com
           </a>
           .
         </p>
@@ -47,7 +47,7 @@ export default function ContactForm() {
           style={{ marginTop: "24px" }}
           onClick={() => setSent(false)}
         >
-          Send another message
+          Submit another application
         </button>
       </div>
     );
@@ -62,7 +62,7 @@ export default function ContactForm() {
         </div>
         <div className="field-group">
           <label htmlFor="phone">Phone</label>
-          <input id="phone" name="phone" type="tel" required placeholder="+971 …" />
+          <input id="phone" name="phone" type="tel" placeholder="+971 …" />
         </div>
       </div>
       <div className="form__row">
@@ -71,31 +71,35 @@ export default function ContactForm() {
           <input id="email" name="email" type="email" required placeholder="you@email.com" />
         </div>
         <div className="field-group">
-          <label htmlFor="interest">I'm interested in</label>
-          <select id="interest" name="interest" defaultValue="Buying">
-            <option>Buying</option>
-            <option>Selling</option>
-            <option>Leasing</option>
-            <option>Commercial</option>
-            <option>Off-Plan</option>
+          <label htmlFor="role">Role of interest</label>
+          <select id="role" name="role" defaultValue="Real Estate Broker">
+            <option>Real Estate Broker</option>
+            <option>Senior Property Consultant</option>
+            <option>Sales / Leasing Agent</option>
+            <option>Marketing</option>
+            <option>Administration</option>
+            <option>Open application</option>
           </select>
         </div>
       </div>
       <div className="field-group">
-        <label htmlFor="message">What are you searching for?</label>
+        <label htmlFor="message">Tell us about yourself</label>
         <textarea
           id="message"
           name="message"
-          placeholder="Tell us about your goals, budget, and preferred communities…"
+          placeholder="Your experience, what you're looking for, and why First Key…"
         />
       </div>
       {error && <p className="form__error">{error}</p>}
       <button type="submit" className="btn btn--primary" disabled={busy}>
-        {busy ? "Sending…" : "Send message"} <Arrow />
+        {busy ? "Sending…" : "Submit application"} <Arrow />
       </button>
       <p className="form__note">
-        A First Key broker will reply with clear next steps and the right
-        options for you.
+        Prefer email? Send your CV to{" "}
+        <a href="mailto:careers@firstkeyint.com" style={{ color: "var(--blue)" }}>
+          careers@firstkeyint.com
+        </a>
+        .
       </p>
     </form>
   );

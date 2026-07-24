@@ -57,7 +57,8 @@ export default function Home() {
         sub="We help you buy, sell, and lease property across Dubai and the wider UAE — simplifying every step, from your first viewing to the final handover."
         stats={[
           { value: "10+", label: "Years combined experience" },
-          { value: "17", label: "Leading developers" },
+          { value: "50+", label: "Leading developers" },
+          { value: "1000+", label: "Happy customers" },
           { value: "24/7", label: "Broker availability" },
         ]}
       />
