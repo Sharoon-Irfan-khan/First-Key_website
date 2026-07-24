@@ -11,3 +11,6 @@ next-env.d.ts
 
 .vercel
 .env*
+
+# Local temp/scratch files (deploy logs, test scripts)
+_*
