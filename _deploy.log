@@ -76,3 +76,28 @@ Created all serverless functions in: 240.972ms
 Collected static files (public/, static/, .next/static): 49.94ms
 Build Completed in /vercel/output [1m]
 Deploying outputs...
+[2K[1A[2K[G  Production      https://first-key-website-lq20rtvrq-muhammad-alis-projects-ab6ef126.vercel.app
+Completing…
+▲ Aliased         https://firstkeyint.com
+{
+  "status": "ok",
+  "deployment": {
+    "id": "dpl_FPiyGiBQwPDRfPwPaYsoGzauNFSd",
+    "url": "https://first-key-website-lq20rtvrq-muhammad-alis-projects-ab6ef126.vercel.app",
+    "inspectorUrl": "https://vercel.com/muhammad-alis-projects-ab6ef126/first-key-website/FPiyGiBQwPDRfPwPaYsoGzauNFSd",
+    "readyState": "READY",
+    "target": "production",
+    "deploymentApiUrl": "https://api.vercel.com/v13/deployments/dpl_FPiyGiBQwPDRfPwPaYsoGzauNFSd"
+  },
+  "message": "Deployment first-key-website-lq20rtvrq-muhammad-alis-projects-ab6ef126.vercel.app ready.",
+  "next": [
+    {
+      "command": "vercel inspect first-key-website-lq20rtvrq-muhammad-alis-projects-ab6ef126.vercel.app",
+      "when": "Inspect deployment"
+    },
+    {
+      "command": "vercel deploy --prod",
+      "when": "Promote to production"
+    }
+  ]
+}
