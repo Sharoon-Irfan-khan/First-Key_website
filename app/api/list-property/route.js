@@ -37,7 +37,8 @@ export async function POST(request) {
     },
   });
 
-  if (!result.delivered && !result.skipped) {
+  // See the contact route: never report success for an undelivered message.
+  if (!result.delivered) {
     return NextResponse.json(
       { ok: false, error: "We couldn't send your details. Please try again or call us." },
       { status: 502 }

@@ -32,7 +32,10 @@ export async function POST(request) {
     },
   });
 
-  if (!result.delivered && !result.skipped) {
+  // A message that wasn't delivered — for any reason, including email not being
+  // configured — must surface as an error. Reporting success would show the
+  // visitor a thank-you while the enquiry is silently lost.
+  if (!result.delivered) {
     return NextResponse.json(
       { ok: false, error: "We couldn't send your message. Please try again or call us." },
       { status: 502 }

@@ -5,9 +5,33 @@ import { Arrow, WhatsApp } from "./icons";
 
 export default function ProjectEnquiry({ project, developer }) {
   const [sent, setSent] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
   const waText = encodeURIComponent(
     `Hello First Key, I'm interested in the ${project} project. Could you share more information?`
   );
+
+  async function onSubmit(e) {
+    e.preventDefault();
+    setBusy(true);
+    setError("");
+    const form = e.currentTarget;
+    const payload = Object.fromEntries(new FormData(form).entries());
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || "Something went wrong.");
+      setSent(true);
+    } catch (err) {
+      setError(err.message || "Something went wrong. Please try again.");
+    } finally {
+      setBusy(false);
+    }
+  }
 
   return (
     <section className="section enquiry">
@@ -41,38 +65,41 @@ export default function ProjectEnquiry({ project, developer }) {
               </p>
             </div>
           ) : (
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                setSent(true);
-              }}
-            >
+            <form onSubmit={onSubmit}>
               <span className="eyebrow" style={{ marginBottom: "22px" }}>
                 Enquire about this project
               </span>
+              {/* Tells the broker which project page the enquiry came from. */}
+              <input
+                type="hidden"
+                name="interest"
+                value={`${project}${developer ? ` — ${developer}` : ""}`}
+              />
               <div className="form__row">
                 <div className="field-group">
                   <label htmlFor="pe-name">Full name</label>
-                  <input id="pe-name" type="text" required placeholder="Your name" />
+                  <input id="pe-name" name="name" type="text" required placeholder="Your name" />
                 </div>
                 <div className="field-group">
                   <label htmlFor="pe-phone">Phone</label>
-                  <input id="pe-phone" type="tel" required placeholder="+971 …" />
+                  <input id="pe-phone" name="phone" type="tel" required placeholder="+971 …" />
                 </div>
               </div>
               <div className="field-group">
                 <label htmlFor="pe-email">Email</label>
-                <input id="pe-email" type="email" required placeholder="you@email.com" />
+                <input id="pe-email" name="email" type="email" required placeholder="you@email.com" />
               </div>
               <div className="field-group">
                 <label htmlFor="pe-msg">Message</label>
                 <textarea
                   id="pe-msg"
+                  name="message"
                   defaultValue={`Hello, I'm interested in the ${project} project. Could you please provide me with more information?`}
                 />
               </div>
-              <button type="submit" className="btn btn--primary">
-                Send enquiry <Arrow />
+              {error && <p className="form__error">{error}</p>}
+              <button type="submit" className="btn btn--primary" disabled={busy}>
+                {busy ? "Sending…" : "Send enquiry"} <Arrow />
               </button>
               <p className="form__note">We reply within one business day.</p>
             </form>
