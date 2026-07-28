@@ -58,26 +58,17 @@ and `vishal@`.
   means SMTP accepted the message for `info@firstkeyint.com`. An unset or empty
   `CONTACT_TO` would have returned 502, so this also confirms the env var.
 
-## Not yet verified
-
-**Nobody has opened the `info@firstkeyint.com` mailbox to confirm the test
-messages actually arrived.** SMTP acceptance proves the message was handed off,
-not that Hostinger filed it into the inbox. Log in at <https://mail.hostinger.com>
-and confirm before treating this as finished.
+- **Inbox delivery confirmed on 2026-07-28.** A test submission posted to the
+  live endpoint arrived in the recipient's inbox, closing the last unverified
+  link in the chain: form → API → SMTP → MX → mailbox.
 
 ## Remaining work
 
-1. **Confirm inbox delivery** (above). Until this is done, treat the setup as
-   unproven.
-2. **DKIM** — not yet added. Hostinger generates a per-domain record shown in
+1. **DKIM** — not yet added. Hostinger generates a per-domain record shown in
    hPanel under the domain's email DNS settings. Without it, mail sent *from*
    `@firstkeyint.com` is more likely to be marked as spam. It does not affect
    *receiving*, so it is not urgent.
-3. **Commit the code changes.** `lib/email.js`, the three API routes and
-   `components/ProjectEnquiry.jsx` are live in production but uncommitted to git.
-   If the project is connected to GitHub for auto-deploy, the next push would
-   overwrite production with the old broken code.
-4. **Optional — send from the domain.** Outbound mail still authenticates as a
+2. **Optional — send from the domain.** Outbound mail still authenticates as a
    personal Gmail, so notifications arrive from `get.muhammad5@gmail.com`. To
    change this, point `SMTP_HOST` at Hostinger's outgoing server with the
    `info@` credentials and set
