@@ -403,6 +403,81 @@ em {
   width: 100%;
 }
 
+/* Blogs dropdown. The panel is padded away from the trigger by a transparent
+   bridge so the pointer can travel into it without the menu closing. */
+.nav__group {
+  position: relative;
+  display: inline-flex;
+}
+.nav__menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, 6px);
+  margin-top: 12px;
+  min-width: 232px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 18px 44px rgba(13, 27, 42, 0.14);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.22s var(--ease), transform 0.22s var(--ease),
+    visibility 0.22s;
+  z-index: 60;
+}
+.nav__menu::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 0;
+  right: 0;
+  height: 12px;
+}
+.nav__group:hover .nav__menu,
+.nav__group:focus-within .nav__menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+.nav__menu a {
+  padding: 9px 20px;
+  font-size: 0.8rem;
+  line-height: 1.35;
+  white-space: nowrap;
+  color: var(--ink);
+  transition: background 0.2s var(--ease), color 0.2s var(--ease);
+}
+/* The shared .nav a underline would sit across the panel, so drop it here. */
+.nav__menu a::after {
+  display: none;
+}
+.nav__menu a:hover {
+  background: #f4f7fa;
+  color: var(--blue);
+}
+/* The panel is always light, so its links must not inherit the white text the
+   header uses while it sits over a hero. */
+.header--top .nav__menu a {
+  color: var(--ink);
+}
+
+.mobile-menu__sub {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 2px 0 10px 42px;
+}
+.mobile-menu__sub a {
+  font-size: 0.95rem;
+  opacity: 0.72;
+}
+
 .header__cta {
   display: inline-flex;
 }

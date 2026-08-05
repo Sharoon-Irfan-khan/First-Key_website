@@ -5,12 +5,24 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
+import { POST_CATEGORIES } from "@/sanity/schemas/post";
+
+// "All articles" first so the parent link is still reachable once Blogs becomes
+// a menu rather than a plain link.
+const BLOG_LINKS = [
+  { href: "/blogs", label: "All articles" },
+  ...POST_CATEGORIES.map((c) => ({
+    href: `/blogs/category/${c.value}`,
+    label: c.title,
+  })),
+];
+
 const NAV = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/developers", label: "Developers" },
   { href: "/list-property", label: "List Property" },
-  { href: "/blogs", label: "Blogs" },
+  { href: "/blogs", label: "Blogs", children: BLOG_LINKS },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -62,15 +74,35 @@ export default function Header() {
           </Link>
 
           <nav className="nav" aria-label="Primary">
-            {NAV.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={isActive(item.href) ? "page" : undefined}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {NAV.map((item) =>
+              item.children ? (
+                // Opened by hover or keyboard focus in CSS, so the parent stays
+                // a real link to /blogs instead of a button that goes nowhere.
+                <div key={item.href} className="nav__group">
+                  <Link
+                    href={item.href}
+                    aria-current={isActive(item.href) ? "page" : undefined}
+                  >
+                    {item.label}
+                  </Link>
+                  <div className="nav__menu">
+                    {item.children.map((child) => (
+                      <Link key={child.href} href={child.href}>
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={isActive(item.href) ? "page" : undefined}
+                >
+                  {item.label}
+                </Link>
+              )
+            )}
           </nav>
 
           <div className="header__cta">
@@ -108,10 +140,23 @@ export default function Header() {
         </button>
         <nav aria-label="Mobile">
           {NAV.map((item, i) => (
-            <Link key={item.href} href={item.href}>
-              <span className="n">{String(i + 1).padStart(2, "0")}</span>
-              {item.label}
-            </Link>
+            <div key={item.href}>
+              <Link href={item.href}>
+                <span className="n">{String(i + 1).padStart(2, "0")}</span>
+                {item.label}
+              </Link>
+              {item.children && (
+                <div className="mobile-menu__sub">
+                  {item.children
+                    .filter((child) => child.href !== item.href)
+                    .map((child) => (
+                      <Link key={child.href} href={child.href}>
+                        {child.label}
+                      </Link>
+                    ))}
+                </div>
+              )}
+            </div>
           ))}
         </nav>
         <Link href="/contact" className="btn btn--primary">
