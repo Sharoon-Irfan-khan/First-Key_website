@@ -62,6 +62,28 @@ and `vishal@`.
   live endpoint arrived in the recipient's inbox, closing the last unverified
   link in the chain: form → API → SMTP → MX → mailbox.
 
+## Broken again by the Vercel account migration (2026-08-05)
+
+Moving the site to the `sharoonirfan09` Vercel account on 2026-07-31 created a
+**new project**, and environment variables do not travel with a project move.
+The old project under `muhammad-alis-projects` still holds them; the live one
+started with none. Every form returned 502 from 2026-07-31 until this was found.
+
+No leads were lost — runtime logs show the only `/api/*` request in those five
+days was the test that uncovered it.
+
+Symptoms in order, each one a step further along:
+
+| Log line | Meaning |
+| -------- | ------- |
+| `No delivery method configured` | `SMTP_HOST` unset — nothing to send with |
+| `SMTP send failed … EAUTH … 535-5.7.8` | credentials set but Gmail rejected them |
+
+**Both fixes need a redeploy.** Vercel captures environment variables at build
+time, so editing a variable changes nothing until a new deployment goes out.
+Editing `SMTP_PASS` and re-testing against the old deployment will keep showing
+the old error and looks like the fix failed.
+
 ## Remaining work
 
 1. **DKIM** — not yet added. Hostinger generates a per-domain record shown in
