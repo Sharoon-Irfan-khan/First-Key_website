@@ -7,15 +7,12 @@ import { usePathname } from "next/navigation";
 
 import { POST_CATEGORIES } from "@/sanity/schemas/post";
 
-// "All articles" first so the parent link is still reachable once Blogs becomes
-// a menu rather than a plain link.
-const BLOG_LINKS = [
-  { href: "/blogs", label: "All articles" },
-  ...POST_CATEGORIES.map((c) => ({
-    href: `/blogs/category/${c.value}`,
-    label: c.title,
-  })),
-];
+// Exactly the five topics, nothing else — the parent "Blogs" link is still the
+// way to the full list, so an "All articles" row would only pad the menu.
+const BLOG_LINKS = POST_CATEGORIES.map((c) => ({
+  href: `/blogs/category/${c.value}`,
+  label: c.title,
+}));
 
 const NAV = [
   { href: "/", label: "Home" },
@@ -147,13 +144,11 @@ export default function Header() {
               </Link>
               {item.children && (
                 <div className="mobile-menu__sub">
-                  {item.children
-                    .filter((child) => child.href !== item.href)
-                    .map((child) => (
-                      <Link key={child.href} href={child.href}>
-                        {child.label}
-                      </Link>
-                    ))}
+                  {item.children.map((child) => (
+                    <Link key={child.href} href={child.href}>
+                      {child.label}
+                    </Link>
+                  ))}
                 </div>
               )}
             </div>

@@ -418,11 +418,12 @@ em {
   min-width: 232px;
   display: flex;
   flex-direction: column;
-  padding: 10px 0;
-  background: #fff;
-  border: 1px solid var(--line);
+  padding: 8px 0;
   border-radius: 12px;
-  box-shadow: 0 18px 44px rgba(13, 27, 42, 0.14);
+  /* Frosted rather than solid. Without backdrop-filter support the fallback
+     colours below stay opaque enough to read against either background. */
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -445,23 +446,44 @@ em {
   pointer-events: auto;
   transform: translate(-50%, 0);
 }
-/* The panel is white in both header states, so these must out-rank
-   `.header--top .nav a`, which turns nav links white over a hero and is
-   declared further down this file. Three classes beats its two. */
 .header .nav__group .nav__menu a {
   padding: 9px 20px;
   font-size: 0.8rem;
   line-height: 1.35;
   white-space: nowrap;
-  color: var(--ink);
   transition: background 0.2s var(--ease), color 0.2s var(--ease);
 }
 /* The shared .nav a underline would sit across the panel, so drop it here. */
 .nav__menu a::after {
   display: none;
 }
-.header .nav__group .nav__menu a:hover {
-  background: #f4f7fa;
+
+/* Two tints, because the panel hangs over a photographic hero on some pages
+   and over white page content on others. Each carries its own text colour.
+   Three classes so they out-rank `.header--top .nav a`, which paints nav
+   links white and is declared further down this file. */
+.header--top .nav__group .nav__menu {
+  background: rgba(4, 30, 61, 0.52);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 18px 44px rgba(4, 30, 61, 0.34);
+}
+.header--top .nav__group .nav__menu a {
+  color: #fff;
+}
+.header--top .nav__group .nav__menu a:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.header--solid .nav__group .nav__menu {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 44px rgba(13, 27, 42, 0.14);
+}
+.header--solid .nav__group .nav__menu a {
+  color: var(--ink);
+}
+.header--solid .nav__group .nav__menu a:hover {
+  background: rgba(4, 86, 170, 0.08);
   color: var(--blue);
 }
 
