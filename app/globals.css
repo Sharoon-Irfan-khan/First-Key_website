@@ -445,7 +445,10 @@ em {
   pointer-events: auto;
   transform: translate(-50%, 0);
 }
-.nav__menu a {
+/* The panel is white in both header states, so these must out-rank
+   `.header--top .nav a`, which turns nav links white over a hero and is
+   declared further down this file. Three classes beats its two. */
+.header .nav__group .nav__menu a {
   padding: 9px 20px;
   font-size: 0.8rem;
   line-height: 1.35;
@@ -457,14 +460,9 @@ em {
 .nav__menu a::after {
   display: none;
 }
-.nav__menu a:hover {
+.header .nav__group .nav__menu a:hover {
   background: #f4f7fa;
   color: var(--blue);
-}
-/* The panel is always light, so its links must not inherit the white text the
-   header uses while it sits over a hero. */
-.header--top .nav__menu a {
-  color: var(--ink);
 }
 
 .mobile-menu__sub {
