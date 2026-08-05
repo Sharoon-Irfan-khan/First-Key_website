@@ -92,21 +92,19 @@ from a bad deployment in one step.
 
 **Resolved 2026-08-05.** After a new app password and a redeploy, all three
 endpoints return `200 {"ok":true}`: `/api/contact`, `/api/careers`,
-`/api/list-property`. SMTP acceptance is not the same as inbox delivery, though
-— see below.
+`/api/list-property`. Inbox delivery to `info@firstkeyint.com` was confirmed the
+same day.
 
-## Unverified: does `info@firstkeyint.com` still receive?
+## `info@firstkeyint.com` confirmed receiving (2026-08-05)
 
-A `200` means Gmail accepted the message for relay — no more. On 2026-08-05 the
-mailbox could not be found in hPanel: the Emails page showed only a purchase
-screen under both `sharoondigital@gmail.com` (which owns the domain) and
-`get.muhammad5@gmail.com`. The MX records still point at Hostinger, so mail is
-being accepted somewhere, but the mailbox itself was never confirmed.
+The test messages arrived in the inbox, so the whole chain is proven again:
+form → API → SMTP → MX → mailbox.
 
-If it no longer exists, Gmail bounces the message back to
-`get.muhammad5@gmail.com` a few minutes later, and every lead is lost while the
-visitor sees a thank-you. Confirm by opening the `info@` inbox, or by watching
-that Gmail account for a delivery-failure notice.
+Worth recording for next time: the mailbox does **not** appear in hPanel. On
+2026-08-05 the Emails page showed only a purchase screen under both
+`sharoondigital@gmail.com` (which owns the domain) and `get.muhammad5@gmail.com`.
+It receives regardless. Do not read an empty Emails page as "the mailbox is
+gone" — test delivery before concluding anything from that screen.
 
 ## Remaining work
 
