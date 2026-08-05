@@ -84,6 +84,30 @@ time, so editing a variable changes nothing until a new deployment goes out.
 Editing `SMTP_PASS` and re-testing against the old deployment will keep showing
 the old error and looks like the fix failed.
 
+The `EAUTH` half was a dead app password, not a typo: the value in `.env.local`
+was rejected when tested straight against `smtp.gmail.com` from a laptop, with
+and without its spaces. Generating a fresh app password fixed it. If this
+recurs, test the credential outside Vercel first — it separates a bad secret
+from a bad deployment in one step.
+
+**Resolved 2026-08-05.** After a new app password and a redeploy, all three
+endpoints return `200 {"ok":true}`: `/api/contact`, `/api/careers`,
+`/api/list-property`. SMTP acceptance is not the same as inbox delivery, though
+— see below.
+
+## Unverified: does `info@firstkeyint.com` still receive?
+
+A `200` means Gmail accepted the message for relay — no more. On 2026-08-05 the
+mailbox could not be found in hPanel: the Emails page showed only a purchase
+screen under both `sharoondigital@gmail.com` (which owns the domain) and
+`get.muhammad5@gmail.com`. The MX records still point at Hostinger, so mail is
+being accepted somewhere, but the mailbox itself was never confirmed.
+
+If it no longer exists, Gmail bounces the message back to
+`get.muhammad5@gmail.com` a few minutes later, and every lead is lost while the
+visitor sees a thank-you. Confirm by opening the `info@` inbox, or by watching
+that Gmail account for a delivery-failure notice.
+
 ## Remaining work
 
 1. **DKIM** — not yet added. Hostinger generates a per-domain record shown in
