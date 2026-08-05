@@ -1,22 +1,4 @@
 /**
- * The fixed set of topics a post can sit under. Editors pick one from a
- * dropdown — adding a new topic means adding a line here, not typing free text,
- * so the labels stay consistent across the blog.
- */
-export const POST_CATEGORIES = [
-  { title: "Dubai Community", value: "dubai-community" },
-  { title: "UAE Property Market", value: "uae-property-market" },
-  { title: "Real Estate Investment", value: "real-estate-investment" },
-  { title: "Selling in Dubai", value: "selling-in-dubai" },
-  { title: "Renting in Dubai", value: "renting-in-dubai" },
-];
-
-/** Turns a stored category value back into the label editors picked. */
-export function categoryLabel(value) {
-  return POST_CATEGORIES.find((c) => c.value === value)?.title || "";
-}
-
-/**
  * The one document type behind the blog.
  * Editors fill this in at /studio; the site reads it in app/blogs.
  */
@@ -42,9 +24,10 @@ export const post = {
     {
       name: "category",
       title: "Category",
-      type: "string",
-      description: "Pick the topic this post belongs to.",
-      options: { list: POST_CATEGORIES, layout: "dropdown" },
+      type: "reference",
+      to: [{ type: "category" }],
+      description:
+        "Pick the topic this post belongs to. Manage the list under Categories.",
       validation: (Rule) => Rule.required(),
     },
     {
@@ -133,14 +116,18 @@ export const post = {
     },
   ],
   preview: {
-    select: { title: "title", date: "publishedAt", category: "category", media: "coverImage" },
+    select: {
+      title: "title",
+      date: "publishedAt",
+      category: "category.title",
+      media: "coverImage",
+    },
     prepare({ title, date, category, media }) {
       const when = date ? new Date(date).toLocaleDateString("en-GB") : "No date";
-      const label = categoryLabel(category);
       return {
         title,
         media,
-        subtitle: label ? `${label} · ${when}` : when,
+        subtitle: category ? `${category} · ${when}` : when,
       };
     },
   },

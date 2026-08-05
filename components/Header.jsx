@@ -5,25 +5,33 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
-import { POST_CATEGORIES } from "@/sanity/schemas/post";
-
-// Exactly the five topics, nothing else — the parent "Blogs" link is still the
-// way to the full list, so an "All articles" row would only pad the menu.
-const BLOG_LINKS = POST_CATEGORIES.map((c) => ({
-  href: `/blogs/category/${c.value}`,
-  label: c.title,
-}));
-
 const NAV = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/developers", label: "Developers" },
   { href: "/list-property", label: "List Property" },
-  { href: "/blogs", label: "Blogs", children: BLOG_LINKS },
+  { href: "/blogs", label: "Blogs" },
   { href: "/contact", label: "Contact" },
 ];
 
-export default function Header() {
+/**
+ * Categories come from Sanity, so the menu is built at render time rather than
+ * from a constant. The parent "Blogs" link still reaches the full list, which
+ * is why there is no "All articles" row.
+ */
+function withCategories(categories) {
+  if (!categories?.length) return NAV;
+  const children = categories.map((c) => ({
+    href: `/blogs/category/${c.slug}`,
+    label: c.title,
+  }));
+  return NAV.map((item) =>
+    item.href === "/blogs" ? { ...item, children } : item
+  );
+}
+
+export default function Header({ categories = [] }) {
+  const nav = withCategories(categories);
   const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
@@ -71,7 +79,7 @@ export default function Header() {
           </Link>
 
           <nav className="nav" aria-label="Primary">
-            {NAV.map((item) =>
+            {nav.map((item) =>
               item.children ? (
                 // Opened by hover or keyboard focus in CSS, so the parent stays
                 // a real link to /blogs instead of a button that goes nowhere.
@@ -136,7 +144,7 @@ export default function Header() {
           Close ✕
         </button>
         <nav aria-label="Mobile">
-          {NAV.map((item, i) => (
+          {nav.map((item, i) => (
             <div key={item.href}>
               <Link href={item.href}>
                 <span className="n">{String(i + 1).padStart(2, "0")}</span>

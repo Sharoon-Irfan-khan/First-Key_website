@@ -4,31 +4,33 @@ import Hero from "@/components/Hero";
 import Reveal from "@/components/Reveal";
 import { SectionHead, CTA } from "@/components/ui";
 import PostCard from "@/components/blog/PostCard";
-import { getPostsByCategory } from "@/lib/sanity/queries";
-import { POST_CATEGORIES } from "@/sanity/schemas/post";
+import {
+  getCategory,
+  getCategorySlugs,
+  getPostsByCategory,
+} from "@/lib/sanity/queries";
 
-export function generateStaticParams() {
-  return POST_CATEGORIES.map((c) => ({ category: c.value }));
+export async function generateStaticParams() {
+  const slugs = await getCategorySlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
-function findCategory(value) {
-  return POST_CATEGORIES.find((c) => c.value === value);
-}
-
-export function generateMetadata({ params }) {
-  const category = findCategory(params.category);
+export async function generateMetadata({ params }) {
+  const category = await getCategory(params.slug);
   if (!category) return { title: "Category not found" };
   return {
-    title: `${category.title} — Dubai Property Insights`,
-    description: `Articles on ${category.title.toLowerCase()} from the brokers at First Key International Real Estate.`,
+    title: category.title,
+    description:
+      category.description ||
+      `Articles on ${category.title.toLowerCase()} from the brokers at First Key International Real Estate.`,
   };
 }
 
 export default async function CategoryPage({ params }) {
-  const category = findCategory(params.category);
+  const category = await getCategory(params.slug);
   if (!category) notFound();
 
-  const posts = await getPostsByCategory(category.value);
+  const posts = await getPostsByCategory(params.slug);
 
   return (
     <>
@@ -38,7 +40,10 @@ export default async function CategoryPage({ params }) {
         image="/images/sky-downtown.jpg"
         eyebrow="Insights"
         title={category.title}
-        sub={`Everything we have written on ${category.title.toLowerCase()}.`}
+        sub={
+          category.description ||
+          `Everything we have written on ${category.title.toLowerCase()}.`
+        }
       />
 
       <section className="section">

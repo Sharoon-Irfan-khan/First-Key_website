@@ -2,11 +2,10 @@ import Link from "next/link";
 import { Arrow } from "../icons";
 import { imageUrl } from "@/lib/sanity/image";
 import { formatPostDate } from "@/lib/sanity/format";
-import { categoryLabel } from "@/sanity/schemas/post";
 
 export default function PostCard({ post }) {
   const cover = imageUrl(post.coverImage, 900);
-  const category = categoryLabel(post.category);
+  const category = post.category?.title;
 
   return (
     <Link href={`/blogs/${post.slug}`} className="pjcard">

@@ -7,7 +7,6 @@ import PortableBody from "@/components/blog/PortableBody";
 import { getPost, getPostSlugs } from "@/lib/sanity/queries";
 import { imageUrl } from "@/lib/sanity/image";
 import { formatPostDate } from "@/lib/sanity/format";
-import { categoryLabel } from "@/sanity/schemas/post";
 
 export async function generateStaticParams() {
   const slugs = await getPostSlugs();
@@ -52,9 +51,14 @@ export default async function PostPage({ params }) {
 
           <Reveal>
             <p className="post__date">
-              {categoryLabel(post.category)
-                ? `${categoryLabel(post.category)} · `
-                : ""}
+              {post.category?.slug && (
+                <>
+                  <Link href={`/blogs/category/${post.category.slug}`}>
+                    {post.category.title}
+                  </Link>
+                  {" · "}
+                </>
+              )}
               {formatPostDate(post.publishedAt)}
             </p>
             <h1 className="display post__title">{post.title}</h1>

@@ -2,6 +2,7 @@ import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { getCategories } from "@/lib/sanity/queries";
 
 const display = Cormorant_Garamond({
   subsets: ["latin"],
@@ -41,14 +42,18 @@ export const viewport = {
   themeColor: "#041e3d",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  // Fetched here rather than inside Header so the Blogs menu is server-rendered
+  // on every page, without turning the header into a data-fetching client.
+  const categories = await getCategories();
+
   return (
     <html lang="en" className={`${display.variable} ${sans.variable}`}>
       <body>
         <a className="skip-link" href="#main">
           Skip to content
         </a>
-        <Header />
+        <Header categories={categories} />
         <main id="main">{children}</main>
         <Footer />
       </body>
