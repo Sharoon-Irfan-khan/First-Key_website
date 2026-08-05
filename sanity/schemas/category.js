@@ -2,7 +2,7 @@
  * A blog topic. Its own document type rather than a fixed list in code, so the
  * team can add, rename or reorder topics in the Studio without a deploy.
  *
- * The slug is what appears in the URL (/blogs/category/<slug>) and what the
+ * The slug is what appears in the URL (/category/<slug>) and what the
  * navigation links to, so changing it moves the page — see the field note.
  */
 export const category = {
@@ -22,7 +22,7 @@ export const category = {
       title: "URL slug",
       type: "slug",
       description:
-        "The address of the category, e.g. /blogs/category/renting-in-dubai. Changing this breaks any link already shared.",
+        "The address of the category, e.g. /category/renting-in-dubai. Changing this breaks any link already shared.",
       options: { source: "title", maxLength: 96 },
       validation: (Rule) => Rule.required(),
     },

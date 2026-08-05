@@ -22,7 +22,7 @@ const NAV = [
 function withCategories(categories) {
   if (!categories?.length) return NAV;
   const children = categories.map((c) => ({
-    href: `/blogs/category/${c.slug}`,
+    href: `/category/${c.slug}`,
     label: c.title,
   }));
   return NAV.map((item) =>

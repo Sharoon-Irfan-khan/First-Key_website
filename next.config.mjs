@@ -9,11 +9,20 @@ const nextConfig = {
   // through their Dashboard, which cannot render a v3 Studio, so editors need
   // an address they can type from memory instead.
   async redirects() {
-    return ["/admin", "/cms"].map((source) => ({
-      source,
-      destination: "/studio",
-      permanent: false,
-    }));
+    return [
+      ...["/admin", "/cms"].map((source) => ({
+        source,
+        destination: "/studio",
+        permanent: false,
+      })),
+      // Categories moved up to the root. Permanent so search engines transfer
+      // the old address's standing rather than treating it as a second page.
+      {
+        source: "/blogs/category/:slug",
+        destination: "/category/:slug",
+        permanent: true,
+      },
+    ];
   },
 };
 

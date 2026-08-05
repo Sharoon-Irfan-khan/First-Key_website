@@ -53,7 +53,7 @@ export default async function PostPage({ params }) {
             <p className="post__date">
               {post.category?.slug && (
                 <>
-                  <Link href={`/blogs/category/${post.category.slug}`}>
+                  <Link href={`/category/${post.category.slug}`}>
                     {post.category.title}
                   </Link>
                   {" · "}
