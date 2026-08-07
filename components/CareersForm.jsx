@@ -37,8 +37,8 @@ export default function CareersForm() {
         <p style={{ marginTop: "14px" }}>
           Our team will review your details and reach out if there's a strong
           fit. To attach your CV, email it to{" "}
-          <a href="mailto:careers@firstkeyint.com" style={{ color: "var(--blue)" }}>
-            careers@firstkeyint.com
+          <a href="mailto:info@firstkeyint.com" style={{ color: "var(--blue)" }}>
+            info@firstkeyint.com
           </a>
           .
         </p>
@@ -96,8 +96,8 @@ export default function CareersForm() {
       </button>
       <p className="form__note">
         Prefer email? Send your CV to{" "}
-        <a href="mailto:careers@firstkeyint.com" style={{ color: "var(--blue)" }}>
-          careers@firstkeyint.com
+        <a href="mailto:info@firstkeyint.com" style={{ color: "var(--blue)" }}>
+          info@firstkeyint.com
         </a>
         .
       </p>

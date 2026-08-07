@@ -59,8 +59,8 @@ export default function ListProperty() {
                 +971 54 501 1151
               </a>{" "}
               or email{" "}
-              <a href="mailto:vishal@firstkeyint.com" style={{ color: "var(--blue)" }}>
-                vishal@firstkeyint.com
+              <a href="mailto:info@firstkeyint.com" style={{ color: "var(--blue)" }}>
+                info@firstkeyint.com
               </a>
               .
             </p>

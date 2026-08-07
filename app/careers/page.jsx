@@ -81,8 +81,8 @@ export default function Careers() {
               </p>
               <p style={{ marginTop: "18px" }}>
                 To attach your CV, email it directly to{" "}
-                <a href="mailto:careers@firstkeyint.com" style={{ color: "var(--blue)" }}>
-                  careers@firstkeyint.com
+                <a href="mailto:info@firstkeyint.com" style={{ color: "var(--blue)" }}>
+                  info@firstkeyint.com
                 </a>
                 .
               </p>

@@ -48,8 +48,9 @@ Form routing (Vercel production environment variables):
 | `LISTINGS_TO` | `info@firstkeyint.com` |
 
 All three point at the same mailbox because the free Hostinger plan includes one
-account. If more mailboxes are added later, split these back out to `careers@`
-and `vishal@`.
+account. Only split these back out to `careers@` and `vishal@` **after** those
+mailboxes actually exist and a test message has been confirmed to arrive in each
+— see the 2026-08-07 section below for what happens when they don't.
 
 ## Verified
 
@@ -105,6 +106,53 @@ Worth recording for next time: the mailbox does **not** appear in hPanel. On
 `sharoondigital@gmail.com` (which owns the domain) and `get.muhammad5@gmail.com`.
 It receives regardless. Do not read an empty Emails page as "the mailbox is
 gone" — test delivery before concluding anything from that screen.
+
+## Mail addressed to mailboxes that don't exist (2026-08-07)
+
+Reported again as "the contact form is not working". This time the API was
+healthy the whole way through: all three endpoints returned `200 {"ok":true}`,
+MX records resolved, and `SMTP_FROM` matched the authenticated Gmail. The bug
+was in **where** the mail was addressed.
+
+Two separate places pointed at mailboxes that do not exist. The Hostinger free
+plan includes exactly one account, `info@firstkeyint.com`. `careers@` and
+`vishal@` have never been real mailboxes.
+
+**1. The env-var fallbacks in `lib/email.js`.** They read:
+
+```js
+listing: process.env.LISTINGS_TO || "vishal@firstkeyint.com",
+careers: process.env.CAREERS_TO  || "careers@firstkeyint.com",
+contact: process.env.CONTACT_TO  || "info@firstkeyint.com",
+```
+
+If `LISTINGS_TO` or `CAREERS_TO` were ever unset in Vercel — and environment
+variables have already vanished once, in the 2026-07-31 account migration —
+those two forms silently addressed a dead mailbox. Gmail accepts the message for
+relay, so `sendMail()` returns `delivered: true` and the route answers `200`.
+Nothing in the response or the runtime logs indicates a problem. Only the
+contact form's fallback happened to be a real address.
+
+This is a nastier failure than the previous two, because every earlier
+diagnostic — a `200` from the endpoint — reads as success.
+
+All three fallbacks are now `info@firstkeyint.com`, so a missing variable
+degrades to the one mailbox that is known to work instead of a black hole.
+
+**2. Five `mailto:` links published on the site.** The footer, both careers
+sections, and the list-property page advertised `careers@firstkeyint.com` and
+`vishal@firstkeyint.com` to visitors. Anyone who chose "prefer email" over the
+form was writing to an address that bounces. All now point at `info@`.
+
+Worth noting: this half has nothing to do with the form or the API. A report of
+"the email contact form is not working" can mean a visitor emailed a published
+address, not that they used the form. Check both.
+
+### Lesson
+
+`200 {"ok":true}` proves the SMTP relay **accepted** the message. It does not
+prove a mailbox exists at the destination. Verifying the send path end-to-end is
+not the same as verifying the address, and only an inbox check closes that gap.
 
 ## Remaining work
 
