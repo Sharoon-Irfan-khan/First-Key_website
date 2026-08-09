@@ -2,6 +2,7 @@ import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Analytics from "@/components/Analytics";
 import { getCategories } from "@/lib/sanity/queries";
 
 const display = Cormorant_Garamond({
@@ -33,6 +34,11 @@ export const metadata = {
     type: "website",
     locale: "en_AE",
   },
+  // Search Console's "HTML tag" verification method. Leave the env var unset
+  // if you verify through DNS instead.
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
 };
 
 export const viewport = {
@@ -56,6 +62,7 @@ export default async function RootLayout({ children }) {
         <Header categories={categories} />
         <main id="main">{children}</main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
