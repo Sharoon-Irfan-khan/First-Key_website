@@ -59,6 +59,18 @@ export default function Header({ categories = [] }) {
   const isActive = (href) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
+  /**
+   * The dropdown opens on `:hover` or `:focus-within`. A mouse click leaves
+   * focus sitting on the link it hit, so `:focus-within` kept the panel open
+   * even after the pointer had left — dropping focus closes it.
+   *
+   * `detail` counts pointer clicks, so it is 0 when the link was activated by
+   * Enter. Keyboard users keep their focus ring and their open menu.
+   */
+  const dropFocusAfterPointerClick = (e) => {
+    if (e.detail > 0) e.currentTarget.blur();
+  };
+
   return (
     <>
       <header className={`header ${solid ? "header--solid" : "header--top"}`}>
@@ -87,12 +99,17 @@ export default function Header({ categories = [] }) {
                   <Link
                     href={item.href}
                     aria-current={isActive(item.href) ? "page" : undefined}
+                    onClick={dropFocusAfterPointerClick}
                   >
                     {item.label}
                   </Link>
                   <div className="nav__menu">
                     {item.children.map((child) => (
-                      <Link key={child.href} href={child.href}>
+                      <Link
+                        key={child.href}
+                        href={child.href}
+                        onClick={dropFocusAfterPointerClick}
+                      >
                         {child.label}
                       </Link>
                     ))}

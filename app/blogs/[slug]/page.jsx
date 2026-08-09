@@ -16,16 +16,30 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const post = await getPost(params.slug);
   if (!post) return { title: "Article not found" };
-  const cover = imageUrl(post.coverImage, 1200);
+
+  // Every SEO field is optional in the Studio, so each one falls back to the
+  // content the editor already wrote.
+  const title = post.metaTitle || post.title;
+  const description = post.metaDescription || post.excerpt || undefined;
+  const share = imageUrl(post.ogImage || post.coverImage, 1200);
+
   return {
-    title: post.title,
-    description: post.excerpt || undefined,
+    title,
+    description,
+    alternates: post.canonicalUrl ? { canonical: post.canonicalUrl } : undefined,
+    robots: post.noIndex ? { index: false, follow: false } : undefined,
     openGraph: {
-      title: post.title,
-      description: post.excerpt || undefined,
+      title,
+      description,
       type: "article",
       publishedTime: post.publishedAt,
-      images: cover ? [cover] : undefined,
+      images: share ? [share] : undefined,
+    },
+    twitter: {
+      card: share ? "summary_large_image" : "summary",
+      title,
+      description,
+      images: share ? [share] : undefined,
     },
   };
 }
