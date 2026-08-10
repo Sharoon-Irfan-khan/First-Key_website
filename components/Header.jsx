@@ -34,6 +34,8 @@ export default function Header({ categories = [] }) {
   const nav = withCategories(categories);
   const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);
+  // href of the mobile group whose children are showing, or null for none.
+  const [openSub, setOpenSub] = useState(null);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -51,10 +53,17 @@ export default function Header({ categories = [] }) {
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
+    // Reopening the sheet should show the short list again, not whatever
+    // section happened to be expanded last time.
+    if (!open) setOpenSub(null);
     return () => {
       document.body.style.overflow = "";
     };
   }, [open]);
+
+  // Tapping the link for the page you are already on leaves the pathname
+  // unchanged, so the sheet has to be closed by hand as well.
+  const closeMenu = () => setOpen(false);
 
   const isActive = (href) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -145,32 +154,65 @@ export default function Header({ categories = [] }) {
       </header>
 
       <div className={`mobile-menu ${open ? "is-open" : ""}`}>
-        <Link
-          href="/"
-          className="mobile-menu__brand"
-          onClick={() => setOpen(false)}
-        >
-          <Image src="/images/emblem-white.png" alt="" width={34} height={34} />
-          <b>First Key International</b>
-        </Link>
-        <button
-          className="mobile-menu__close"
-          onClick={() => setOpen(false)}
-          aria-label="Close menu"
-        >
-          Close ✕
-        </button>
-        <nav aria-label="Mobile">
+        <div className="mobile-menu__bar">
+          <Link href="/" className="mobile-menu__brand" onClick={closeMenu}>
+            <Image
+              src="/images/emblem-white.png"
+              alt=""
+              width={34}
+              height={34}
+            />
+            <b>First Key International</b>
+          </Link>
+          <button
+            className="mobile-menu__close"
+            onClick={closeMenu}
+            aria-label="Close menu"
+          >
+            Close ✕
+          </button>
+        </div>
+
+        <nav className="mobile-menu__nav" aria-label="Mobile">
           {nav.map((item, i) => (
-            <div key={item.href}>
-              <Link href={item.href}>
-                <span className="n">{String(i + 1).padStart(2, "0")}</span>
-                {item.label}
-              </Link>
-              {item.children && (
+            <div className="mobile-menu__item" key={item.href}>
+              <div className="mobile-menu__row">
+                <Link
+                  href={item.href}
+                  aria-current={isActive(item.href) ? "page" : undefined}
+                  onClick={closeMenu}
+                >
+                  <span className="n">{String(i + 1).padStart(2, "0")}</span>
+                  {item.label}
+                </Link>
+                {item.children && (
+                  // A separate control, so the row's own link still goes to the
+                  // section instead of being swallowed by the expander.
+                  <button
+                    className="mobile-menu__toggle"
+                    aria-expanded={openSub === item.href}
+                    aria-label={`Show ${item.label} categories`}
+                    onClick={() =>
+                      setOpenSub((cur) => (cur === item.href ? null : item.href))
+                    }
+                  >
+                    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden>
+                      <path
+                        d="M6 9l6 6 6-6"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </button>
+                )}
+              </div>
+              {item.children && openSub === item.href && (
                 <div className="mobile-menu__sub">
                   {item.children.map((child) => (
-                    <Link key={child.href} href={child.href}>
+                    <Link key={child.href} href={child.href} onClick={closeMenu}>
                       {child.label}
                     </Link>
                   ))}
@@ -179,7 +221,12 @@ export default function Header({ categories = [] }) {
             </div>
           ))}
         </nav>
-        <Link href="/contact" className="btn btn--primary">
+
+        <Link
+          href="/contact"
+          className="btn btn--primary"
+          onClick={closeMenu}
+        >
           Book a Consultation
         </Link>
       </div>
