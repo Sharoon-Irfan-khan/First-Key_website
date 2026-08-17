@@ -44,6 +44,30 @@ export async function generateMetadata({ params }) {
   };
 }
 
+// Schema.org Article markup for search engines. There is no author persona on
+// this site, so First Key is credited as both author and publisher rather
+// than inventing a byline.
+function articleJsonLd(post) {
+  const url = `https://firstkeyint.com/blogs/${post.slug}`;
+  const image = imageUrl(post.ogImage || post.coverImage, 1200);
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.metaDescription || post.excerpt || undefined,
+    image: image ? [image] : undefined,
+    datePublished: post.publishedAt,
+    dateModified: post._updatedAt || post.publishedAt,
+    author: { "@type": "Organization", name: "First Key International Real Estate", url: "https://firstkeyint.com" },
+    publisher: {
+      "@type": "Organization",
+      name: "First Key International Real Estate",
+      logo: { "@type": "ImageObject", url: "https://firstkeyint.com/images/emblem-blue.png" },
+    },
+    mainEntityOfPage: { "@type": "WebPage", "@id": post.canonicalUrl || url },
+  };
+}
+
 export default async function PostPage({ params }) {
   const post = await getPost(params.slug);
   if (!post) notFound();
@@ -52,6 +76,13 @@ export default async function PostPage({ params }) {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        // JSON-LD from CMS-authored fields only; escape "<" so it can't break out of the script tag.
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleJsonLd(post)).replace(/</g, "\\u003c"),
+        }}
+      />
       <article className="section post">
         <div className="container container--narrow">
           <Reveal>
