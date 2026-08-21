@@ -13,6 +13,8 @@ const STATIC_ROUTES = [
   { path: "/list-property", priority: 0.7, changeFrequency: "monthly" },
   { path: "/careers", priority: 0.5, changeFrequency: "monthly" },
   { path: "/blogs", priority: 0.8, changeFrequency: "weekly" },
+  { path: "/privacy", priority: 0.3, changeFrequency: "yearly" },
+  { path: "/terms-and-conditions", priority: 0.3, changeFrequency: "yearly" },
 ];
 
 export default async function sitemap() {

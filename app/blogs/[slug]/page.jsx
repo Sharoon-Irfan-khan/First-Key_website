@@ -4,13 +4,15 @@ import Reveal from "@/components/Reveal";
 import { CTA } from "@/components/ui";
 import { Arrow } from "@/components/icons";
 import PortableBody from "@/components/blog/PortableBody";
-import { getPost, getPostSlugs } from "@/lib/sanity/queries";
+import { getPost, getPosts } from "@/lib/sanity/queries";
 import { imageUrl } from "@/lib/sanity/image";
 import { formatPostDate } from "@/lib/sanity/format";
 
 export async function generateStaticParams() {
-  const slugs = await getPostSlugs();
-  return slugs.map((slug) => ({ slug }));
+  // getPosts() (unlike getPostSlugs()) returns slugs normalized to clean
+  // kebab-case, so a mistyped Studio slug still builds under its proper URL.
+  const posts = await getPosts();
+  return posts.map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({ params }) {

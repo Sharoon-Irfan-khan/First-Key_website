@@ -2259,6 +2259,18 @@ em {
   font-size: 0.82rem;
   color: rgba(255, 255, 255, 0.5);
 }
+.footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.footer__legal a {
+  color: rgba(255, 255, 255, 0.5);
+  transition: color 0.25s var(--ease);
+}
+.footer__legal a:hover {
+  color: #fff;
+}
 .footer__bottom .socials {
   display: flex;
   gap: 12px;

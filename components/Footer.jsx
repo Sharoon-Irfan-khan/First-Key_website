@@ -60,6 +60,10 @@ export default function Footer() {
 
         <div className="footer__bottom">
           <span>© {year} First Key International Real Estate. All rights reserved.</span>
+          <div className="footer__legal">
+            <Link href="/privacy">Privacy Policy</Link>
+            <Link href="/terms-and-conditions">Terms and Conditions</Link>
+          </div>
           <div className="socials">
             <a href="https://wa.me/971545011151" aria-label="WhatsApp" target="_blank" rel="noreferrer">
               <WhatsApp />
