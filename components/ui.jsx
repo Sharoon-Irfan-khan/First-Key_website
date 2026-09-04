@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import KeyMark from "./KeyMark";
 import { Arrow } from "./icons";
@@ -38,8 +39,7 @@ export function CTA({
   return (
     <section className="cta section">
       <div className="cta__media">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={image} alt="" loading="lazy" />
+        <Image src={image} alt="" fill sizes="100vw" loading="lazy" />
       </div>
       <div className="cta__wash" />
       <div className="container cta__inner">

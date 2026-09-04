@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Hero from "@/components/Hero";
 import Reveal from "@/components/Reveal";
 import { SectionHead, CTA } from "@/components/ui";
@@ -43,12 +44,13 @@ export default function About() {
       <section className="section">
         <div className="container split split--media-right">
           <Reveal className="split__media">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/images/palm-jumeirah-aerial.jpg"
               alt="Aerial view along Palm Jumeirah at sunset, Dubai"
+              width={800}
+              height={600}
+              sizes="(max-width: 900px) 100vw, 50vw"
               loading="lazy"
-              decoding="async"
             />
             <div className="badge">
               <b>10+</b>
@@ -79,8 +81,7 @@ export default function About() {
       {/* Mission */}
       <section className="section devband devband--center">
         <div className="devband__media">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/sky-d.jpg" alt="" loading="lazy" />
+          <Image src="/images/sky-d.jpg" alt="" fill sizes="100vw" loading="lazy" />
         </div>
         <div className="devband__wash" />
         <div className="container">
@@ -139,12 +140,13 @@ export default function About() {
             </div>
           </Reveal>
           <Reveal delay={120} className="split__media">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/images/palm-pointe-boardwalk.jpg"
               alt="The waterfront boardwalk at The Pointe, Palm Jumeirah"
+              width={800}
+              height={600}
+              sizes="(max-width: 900px) 100vw, 50vw"
               loading="lazy"
-              decoding="async"
             />
           </Reveal>
         </div>

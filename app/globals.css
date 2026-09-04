@@ -2039,6 +2039,7 @@ em {
 
 /* gallery */
 .prop-gallery__main {
+  position: relative;
   border-radius: 8px;
   overflow: hidden;
   aspect-ratio: 4 / 3;
@@ -2056,6 +2057,7 @@ em {
   margin-top: 12px;
 }
 .prop-gallery__thumb {
+  position: relative;
   border-radius: 5px;
   overflow: hidden;
   aspect-ratio: 4 / 3;

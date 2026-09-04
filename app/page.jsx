@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import Hero from "@/components/Hero";
 import Reveal from "@/components/Reveal";
@@ -67,12 +68,13 @@ export default function Home() {
       <section className="section">
         <div className="container split">
           <Reveal className="split__media">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/images/jbr-bluewaters.jpg"
               alt="Bluewaters Island and Ain Dubai seen across JBR beach"
+              width={800}
+              height={600}
+              sizes="(max-width: 900px) 100vw, 50vw"
               loading="lazy"
-              decoding="async"
             />
             <div className="badge">
               <b>1:1</b>
@@ -130,8 +132,13 @@ export default function Home() {
       {/* Developers strip */}
       <section className="section-tight devband">
         <div className="devband__media">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/sky-marina-towers.jpg" alt="" loading="lazy" />
+          <Image
+            src="/images/sky-marina-towers.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            loading="lazy"
+          />
         </div>
         <div className="devband__wash" />
         <div className="container">

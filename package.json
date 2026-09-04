@@ -20,9 +20,14 @@
     "react-dom": "18.3.1",
     "resend": "^6.18.0",
     "sanity": "^3.99.0",
+    "sharp": "^0.35.3",
     "styled-components": "^6.4.4"
   },
-  "devDependencies": {
-    "sharp": "^0.35.3"
-  }
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "Firefox ESR",
+    "not dead",
+    "not IE 11"
+  ]
 }

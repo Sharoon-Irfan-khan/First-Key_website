@@ -5,6 +5,13 @@ const nextConfig = {
   // .next cache a running `npm run dev` is using.
   distDir: process.env.NEXT_DIST_DIR || ".next",
 
+  images: {
+    // Photography here almost never changes after publish, so let the CDN and
+    // browser hold optimized variants far longer than Next's 60s default.
+    minimumCacheTTL: 60 * 60 * 24 * 30,
+    formats: ["image/avif", "image/webp"],
+  },
+
   // Short ways in to the CMS. Sanity's own "Open Sanity Studio" button routes
   // through their Dashboard, which cannot render a v3 Studio, so editors need
   // an address they can type from memory instead.

@@ -1,12 +1,17 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Arrow, Bed, Bath, Area } from "./icons";
+
+// .projects-grid runs 2-up above 700px and stacks to 1-up below it (see
+// globals.css); .dev-list is always a single full-width column.
+const GRID_CARD_SIZES = "(max-width: 700px) 100vw, 50vw";
+const FULL_WIDTH_SIZES = "100vw";
 
 export function PropertyCard({ p }) {
   return (
     <article className="pcard">
       <div className="pcard__media">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={p.image} alt={p.title} loading="lazy" />
+        <Image src={p.image} alt={p.title} fill sizes={GRID_CARD_SIZES} loading="lazy" />
         <span className="pcard__tag">{p.tag}</span>
       </div>
       <div className="pcard__body">
@@ -36,8 +41,7 @@ export function DeveloperCard({ d, index }) {
   return (
     <Link href={`/developers/${d.slug}`} className="devcard">
       <div className="devcard__media">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={d.image} alt="" loading="lazy" />
+        <Image src={d.image} alt="" fill sizes={FULL_WIDTH_SIZES} loading="lazy" />
       </div>
       <div className="devcard__wash" />
       <div className="devcard__inner">
@@ -71,8 +75,7 @@ export function ProjectCard({ p }) {
   return (
     <Link href={p.href || "/contact"} className="pjcard">
       <div className="pjcard__media">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={p.image} alt={p.name} loading="lazy" />
+        <Image src={p.image} alt={p.name} fill sizes={GRID_CARD_SIZES} loading="lazy" />
       </div>
       <div className="pjcard__body">
         <h3>{p.name}</h3>

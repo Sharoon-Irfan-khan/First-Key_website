@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 export default function ProjectGallery({ images = [], name = "" }) {
   const [active, setActive] = useState(0);
@@ -9,8 +10,13 @@ export default function ProjectGallery({ images = [], name = "" }) {
   return (
     <div className="prop-gallery">
       <div className="prop-gallery__main">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={images[active]} alt={`${name} — view ${active + 1}`} />
+        <Image
+          src={images[active]}
+          alt={`${name} — view ${active + 1}`}
+          fill
+          sizes="(max-width: 900px) 100vw, 800px"
+          priority={active === 0}
+        />
       </div>
       {images.length > 1 && (
         <div className="prop-gallery__thumbs">
@@ -22,8 +28,7 @@ export default function ProjectGallery({ images = [], name = "" }) {
               aria-label={`Show image ${i + 1} of ${name}`}
               aria-current={i === active ? "true" : undefined}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={src} alt="" loading="lazy" />
+              <Image src={src} alt="" fill sizes="140px" loading="lazy" />
             </button>
           ))}
         </div>

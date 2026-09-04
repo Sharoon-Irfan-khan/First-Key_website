@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Eyebrow } from "./ui";
 import { Arrow } from "./icons";
@@ -15,8 +16,15 @@ export default function Hero({
   return (
     <section className={`hero ${page ? "hero--page" : ""}`}>
       <div className="hero__media">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={image} alt="Dubai skyline" fetchPriority="high" />
+        <Image
+          src={image}
+          alt="Dubai skyline"
+          fill
+          sizes="100vw"
+          quality={75}
+          priority
+          fetchPriority="high"
+        />
       </div>
       <div className="hero__wash" />
       <div className="container hero__inner">
