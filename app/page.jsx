@@ -5,6 +5,8 @@ import Reveal from "@/components/Reveal";
 import { Eyebrow, SectionHead, CTA } from "@/components/ui";
 import { Arrow, Compass, Scale, Chat, Shield } from "@/components/icons";
 import { developers } from "@/lib/developers";
+import { awards, moments } from "@/lib/gallery";
+import { AwardsShowcase, MomentsGallery } from "@/components/Gallery";
 
 const services = [
   {
@@ -126,6 +128,16 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
+          <Reveal className="cs-crosslink">
+            <p>
+              Need mortgage, accounting, tax follow-up or business support?
+              First Key Corporate Services, a separately registered company,
+              can help.
+            </p>
+            <Link href="/corporate-services" className="link-arrow">
+              Explore Corporate Services <Arrow />
+            </Link>
+          </Reveal>
         </div>
       </section>
 
@@ -188,6 +200,48 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Awards & recognition */}
+      <section className="section bg-navy awards-section" id="awards">
+        <div className="container awards-head">
+          <Reveal>
+            <SectionHead
+              light
+              eyebrow="Awards & recognition"
+              title="Our Awards & Recognition"
+              lead="Celebrating Excellence, Building Trust."
+            />
+          </Reveal>
+          <Reveal delay={120}>
+            <Link href="/gallery#awards" className="btn btn--outline-light">
+              View All Awards <Arrow />
+            </Link>
+          </Reveal>
+        </div>
+        <AwardsShowcase awards={awards.filter((a) => a.home)} />
+      </section>
+
+      {/* Life at First Key */}
+      <section className="section bg-mist">
+        <div className="container">
+          <Reveal>
+            <SectionHead
+              eyebrow="Our gallery"
+              title="Life at First Key"
+              lead="Moments, Connections & Milestones."
+              center
+            />
+          </Reveal>
+          <div style={{ marginTop: "56px" }}>
+            <MomentsGallery photos={moments.filter((m) => m.home)} />
+          </div>
+          <Reveal className="moments-more">
+            <Link href="/gallery" className="btn btn--primary">
+              View Full Gallery <Arrow />
+            </Link>
+          </Reveal>
         </div>
       </section>
 

@@ -11,8 +11,10 @@ const STATIC_ROUTES = [
   { path: "/developers", priority: 0.9, changeFrequency: "weekly" },
   { path: "/contact", priority: 0.7, changeFrequency: "monthly" },
   { path: "/list-property", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/corporate-services", priority: 0.8, changeFrequency: "monthly" },
   { path: "/careers", priority: 0.5, changeFrequency: "monthly" },
   { path: "/blogs", priority: 0.8, changeFrequency: "weekly" },
+  { path: "/gallery", priority: 0.6, changeFrequency: "monthly" },
   { path: "/privacy", priority: 0.3, changeFrequency: "yearly" },
   { path: "/terms-and-conditions", priority: 0.3, changeFrequency: "yearly" },
 ];

@@ -2294,6 +2294,349 @@ em {
 }
 
 /* ============================================================
+   Awards & recognition (horizontal exhibition wall)
+   ============================================================ */
+.awards-section {
+  overflow: hidden;
+}
+.awards-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.awards__controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 40px;
+}
+.awards__btn {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--line-dark);
+  color: #fff;
+  transition: background 0.3s var(--ease), border-color 0.3s var(--ease),
+    opacity 0.3s var(--ease);
+}
+.awards__btn:hover:not(:disabled) {
+  background: #fff;
+  border-color: #fff;
+  color: var(--navy);
+}
+.awards__btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+.awards__track {
+  --award-h: clamp(300px, 34vw, 420px);
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(20px, 2.4vw, 32px);
+  margin-top: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  /* line the first card up with the container edge, let the rest bleed */
+  padding-inline: max(var(--gutter), calc((100vw - var(--maxw)) / 2 + var(--gutter)));
+  scroll-padding-inline: max(var(--gutter), calc((100vw - var(--maxw)) / 2 + var(--gutter)));
+  padding-bottom: 8px;
+}
+.awards__track::-webkit-scrollbar {
+  display: none;
+}
+.award {
+  flex: none;
+  scroll-snap-align: start;
+  /* caption wraps to the width of its photo */
+  width: min-content;
+}
+.award__frame {
+  position: relative;
+  display: block;
+  /* shared height, but never wider than the phone screen */
+  height: min(var(--award-h), calc(82vw / var(--r)));
+  aspect-ratio: var(--r);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--navy-700);
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.6);
+  transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+}
+.award__frame img {
+  object-fit: cover;
+  transition: transform 0.8s var(--ease);
+}
+.award__frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: inherit;
+  pointer-events: none;
+}
+.award__frame:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 44px 80px -30px rgba(0, 0, 0, 0.75);
+}
+.award__frame:hover img {
+  transform: scale(1.04);
+}
+.award__zoom,
+.moment__cap svg {
+  flex: none;
+}
+.award__zoom {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(4, 30, 61, 0.72);
+  color: #fff;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+}
+.award__frame:hover .award__zoom,
+.award__frame:focus-visible .award__zoom {
+  opacity: 1;
+  transform: none;
+}
+.award__text {
+  margin-top: 20px;
+  padding-left: 2px;
+}
+.award__meta {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+.award__title {
+  margin-top: 8px;
+  font-size: 1.35rem;
+  line-height: 1.2;
+  color: #fff;
+}
+
+/* ============================================================
+   Life at First Key (masonry photo gallery)
+   ============================================================ */
+.moments {
+  display: grid;
+  gap: 20px;
+}
+.moments__row {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  margin-inline: auto;
+}
+.moment {
+  flex: 1 1 0;
+  min-width: 0;
+}
+.moment__btn {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--mist-200);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.5s var(--ease), transform 0.5s var(--ease);
+}
+.moment__btn img {
+  object-fit: cover;
+  transition: transform 0.9s var(--ease);
+}
+.moment__btn:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+.moment__btn:hover img {
+  transform: scale(1.04);
+}
+.moment__cap {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 56px 20px 18px;
+  text-align: left;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #fff;
+  background: linear-gradient(to top, rgba(4, 30, 61, 0.85), rgba(4, 30, 61, 0));
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+}
+.moment__btn:hover .moment__cap,
+.moment__btn:focus-visible .moment__cap {
+  opacity: 1;
+  transform: none;
+}
+/* no hover on touch screens: keep captions visible */
+@media (hover: none) {
+  .moment__cap {
+    opacity: 1;
+    transform: none;
+  }
+  .award__zoom {
+    opacity: 1;
+    transform: none;
+  }
+}
+.moments-more {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(28px, 4vw, 44px);
+}
+
+/* ============================================================
+   Lightbox
+   ============================================================ */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 72px clamp(16px, 7vw, 110px) 32px;
+  background: rgba(4, 22, 45, 0.96);
+  animation: lb-fade 0.3s var(--ease);
+}
+.lightbox__bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px clamp(16px, 3vw, 32px);
+  color: #fff;
+}
+.lightbox__count {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.7);
+}
+.lightbox__close,
+.lightbox__nav {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  border: 1px solid var(--line-dark);
+  transition: background 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.lightbox__close:hover,
+.lightbox__nav:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+.lightbox__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.lightbox__nav--prev {
+  left: clamp(8px, 2vw, 32px);
+}
+.lightbox__nav--next {
+  right: clamp(8px, 2vw, 32px);
+}
+.lightbox__figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+  max-height: 100%;
+  animation: lb-in 0.45s var(--ease);
+}
+.lightbox__frame img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(100vh - 190px);
+  max-height: calc(100dvh - 190px);
+  border-radius: 6px;
+  box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.8);
+}
+.lightbox__caption {
+  margin-top: 18px;
+  text-align: center;
+  color: #fff;
+  max-width: 640px;
+}
+.lightbox__caption b {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.3rem;
+  line-height: 1.25;
+  color: #fff;
+}
+.lightbox__caption span {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+@keyframes lb-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes lb-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+}
+@media (max-width: 620px) {
+  .lightbox {
+    padding: 72px 12px 96px;
+  }
+  .lightbox__nav {
+    top: auto;
+    bottom: 24px;
+    transform: none;
+  }
+  .lightbox__nav--prev {
+    left: calc(50% - 60px);
+  }
+  .lightbox__nav--next {
+    right: calc(50% - 60px);
+  }
+  .lightbox__frame img {
+    max-height: calc(100dvh - 250px);
+  }
+}
+
+/* ============================================================
    Reveal animation
    ============================================================ */
 .reveal {
@@ -2395,4 +2738,284 @@ em {
     opacity: 1;
     transform: none;
   }
+}
+
+/* ============================================================
+   Corporate Services page (/corporate-services)
+   First Key Corporate Services DWC-LLC — palette from its approved
+   brand sheet: Royal Blue #054BA2, Graphite #252B36, Steel Blue #B9C9DC.
+   ============================================================ */
+.cs-hero__logo {
+  width: clamp(180px, 22vw, 232px);
+  height: auto;
+  margin-bottom: clamp(18px, 3vh, 28px);
+}
+
+/* anchor targets clear the fixed header */
+.cs-anchor {
+  scroll-margin-top: 70px;
+}
+
+/* registered-entity panel */
+.cs-entity {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 18px 28px;
+  padding: 26px 28px;
+  border: 1px solid var(--line);
+  border-left: 3px solid #054ba2;
+  border-radius: var(--radius);
+  background: #f7f8fa;
+}
+.cs-entity__logo {
+  grid-column: 1 / -1;
+  width: 190px;
+  height: auto;
+}
+.cs-entity dt {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+.cs-entity dd {
+  margin-top: 4px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #252b36;
+}
+.cs-entity__note {
+  margin-top: 18px;
+  font-size: 0.9rem;
+}
+.cs-entity__note a {
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* service cards — 3 + 2 on desktop */
+.cs-services {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: clamp(20px, 2.2vw, 30px);
+}
+.cs-card-wrap {
+  grid-column: span 2;
+  display: flex;
+  scroll-margin-top: 90px;
+}
+.cs-card-wrap:nth-child(4),
+.cs-card-wrap:nth-child(5) {
+  grid-column: span 3;
+}
+.cs-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(28px, 3vw, 40px);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-top: 2px solid transparent;
+  border-radius: var(--radius);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease),
+    border-color 0.4s var(--ease);
+}
+.cs-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+  border-color: transparent;
+  border-top-color: #054ba2;
+}
+.cs-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cs-card .service__ico {
+  color: #054ba2;
+  transition: background 0.4s var(--ease), color 0.4s var(--ease);
+}
+.cs-card:hover .service__ico {
+  background: #054ba2;
+  border-color: #054ba2;
+  color: #fff;
+}
+.cs-card h3 {
+  margin-top: 26px;
+  font-size: 1.55rem;
+}
+.cs-card > p {
+  margin-top: 12px;
+  font-size: 0.97rem;
+}
+.cs-card__list {
+  margin-top: 22px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  gap: 10px;
+  font-size: 0.93rem;
+}
+.cs-card__list .keymark {
+  margin-top: 8px;
+  color: #b9c9dc;
+}
+.cs-card__cta {
+  /* pin to the bottom so buttons line up across a row */
+  margin-top: auto;
+  padding-top: 28px;
+  color: #054ba2;
+  white-space: normal;
+}
+
+/* how we work — numbered timeline */
+.cs-steps {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(24px, 3vw, 40px);
+}
+.cs-step {
+  position: relative;
+  padding-top: 30px;
+  border-top: 1px solid var(--line);
+}
+.cs-step::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 0;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1.5px solid #054ba2;
+}
+.cs-step__n {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 4vw, 3.6rem);
+  font-weight: 500;
+  line-height: 1;
+  color: #054ba2;
+  font-variant-numeric: lining-nums;
+  font-feature-settings: "lnum" 1, "onum" 0;
+}
+.cs-step h3 {
+  margin-top: 20px;
+  font-size: 1.35rem;
+}
+.cs-step p {
+  margin-top: 10px;
+  font-size: 0.96rem;
+}
+
+/* why us */
+.cs-why {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: clamp(40px, 6vw, 96px);
+  align-items: start;
+}
+.cs-why__list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line-dark);
+}
+.cs-why__list > li {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line-dark);
+}
+.cs-why__ico {
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(185, 201, 220, 0.4);
+  color: #b9c9dc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cs-why__list h3 {
+  font-size: 1.35rem;
+}
+.cs-why__list p {
+  margin-top: 6px;
+  font-size: 0.96rem;
+}
+
+/* enquiry */
+.cs-wa {
+  align-self: flex-start;
+}
+
+/* legal entity disclosure under the final CTA */
+.cs-disclosure {
+  padding-block: 28px;
+  background: #f7f8fa;
+  border-top: 1px solid var(--line);
+}
+.cs-disclosure p {
+  max-width: 92ch;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--slate);
+}
+
+@media (max-width: 1100px) {
+  .cs-entity {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 960px) {
+  .cs-services {
+    grid-template-columns: 1fr 1fr;
+  }
+  .cs-card-wrap,
+  .cs-card-wrap:nth-child(4),
+  .cs-card-wrap:nth-child(5) {
+    grid-column: auto;
+  }
+  .cs-card-wrap:nth-child(5) {
+    grid-column: 1 / -1;
+  }
+  .cs-steps {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 48px;
+  }
+  .cs-why {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 620px) {
+  .cs-services,
+  .cs-steps {
+    grid-template-columns: 1fr;
+  }
+  .cs-entity {
+    grid-template-columns: 1fr;
+    padding: 22px;
+  }
+}
+
+/* homepage pointer to the Corporate Services page */
+.cs-crosslink {
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px 32px;
+}
+.cs-crosslink p {
+  max-width: 62ch;
 }
