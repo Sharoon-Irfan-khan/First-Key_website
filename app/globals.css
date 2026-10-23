@@ -2745,10 +2745,18 @@ em {
    First Key Corporate Services DWC-LLC — palette from its approved
    brand sheet: Royal Blue #054BA2, Graphite #252B36, Steel Blue #B9C9DC.
    ============================================================ */
-.cs-hero__logo {
-  width: clamp(180px, 22vw, 232px);
-  height: auto;
+.cs-hero__plate {
+  display: flex;
+  width: fit-content;
   margin-bottom: clamp(18px, 3vh, 28px);
+  padding: 14px 20px;
+  background: #f7f8fa;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+}
+.cs-hero__logo {
+  width: clamp(170px, 20vw, 220px);
+  height: auto;
 }
 
 /* anchor targets clear the fixed header */

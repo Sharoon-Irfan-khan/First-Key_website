@@ -186,15 +186,19 @@ export default function CorporateServices() {
         image="/images/sky-b.jpg"
         imageAlt="Dubai business district skyline at night"
         logo={
-          <Image
-            src="/images/corporate/fkcs-logo-white.svg"
-            alt="First Key Corporate Services"
-            width={232}
-            height={67}
-            className="cs-hero__logo"
-            unoptimized
-            priority
-          />
+          // Full-colour logo on an off-white plate: the approved primary
+          // combination, and royal blue can't sit directly on the dark hero.
+          <span className="cs-hero__plate">
+            <Image
+              src="/images/corporate/fkcs-logo-color.svg"
+              alt="First Key Corporate Services"
+              width={232}
+              height={67}
+              className="cs-hero__logo"
+              unoptimized
+              priority
+            />
+          </span>
         }
         eyebrow="Corporate Services · Dubai"
         title="Your Trusted Partner in Business & Corporate Solutions"
