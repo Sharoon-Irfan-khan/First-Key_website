@@ -2760,7 +2760,7 @@ em {
 .cs-entity {
   margin-top: 32px;
   display: grid;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: 1.5fr 1fr 1fr;
   gap: 18px 28px;
   padding: 26px 28px;
   border: 1px solid var(--line);
@@ -2861,7 +2861,7 @@ em {
 }
 .cs-card__list .keymark {
   margin-top: 8px;
-  color: #b9c9dc;
+  color: #054ba2;
 }
 .cs-card__cta {
   /* pin to the bottom so buttons line up across a row */
@@ -2877,6 +2877,7 @@ em {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: clamp(24px, 3vw, 40px);
+  list-style: none;
 }
 .cs-step {
   position: relative;
@@ -3018,4 +3019,29 @@ em {
 }
 .cs-crosslink p {
   max-width: 62ch;
+}
+
+/* Seven nav items since Corporate Services was added: keep labels and the
+   wordmark on one line, tighten spacing on mid-size screens, and hand over to
+   the mobile menu before the bar gets crowded. */
+.nav a,
+.header .brand__word b {
+  white-space: nowrap;
+}
+.header .brand {
+  flex: none;
+}
+@media (max-width: 1320px) {
+  .nav {
+    gap: 22px;
+  }
+}
+@media (max-width: 1180px) {
+  .nav,
+  .header__cta {
+    display: none;
+  }
+  .nav-toggle {
+    display: flex;
+  }
 }

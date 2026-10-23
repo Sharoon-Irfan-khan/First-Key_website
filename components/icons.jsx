@@ -144,3 +144,48 @@ export const IconTiktok = ({ size = 16 }) => (
     <path d="M16.6 3h-3.3v12.4a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9.2a6.3 6.3 0 1 0 5.3 6.2V9.1a7.9 7.9 0 0 0 4.4 1.3V7.1a4.6 4.6 0 0 1-4.4-4.1z" />
   </svg>
 );
+
+// --- Corporate Services ---
+
+export const HomeKey = ({ size = 26 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" {...base}>
+    <path d="M3 11l9-7 9 7" />
+    <path d="M5 9.5V20h14V9.5" />
+    <circle cx="10" cy="14.5" r="2" />
+    <path d="M12 14.5h4.5M15 14.5v1.8" />
+  </svg>
+);
+
+export const Ledger = ({ size = 26 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" {...base}>
+    <rect x="4" y="3" width="16" height="18" rx="1.5" />
+    <path d="M8 3v18M11 8h6M11 12h6M11 16h4" />
+  </svg>
+);
+
+export const TaxDoc = ({ size = 26 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" {...base}>
+    <path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z" />
+    <path d="M14 3v5h5" />
+    <path d="M9 17l6-6" />
+    <circle cx="9.5" cy="11.5" r="0.9" />
+    <circle cx="14.5" cy="16.5" r="0.9" />
+  </svg>
+);
+
+export const Briefcase = ({ size = 26 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" {...base}>
+    <rect x="3" y="7" width="18" height="13" rx="1.5" />
+    <path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
+    <path d="M3 12.5h18M11 12.5v2h2v-2" />
+  </svg>
+);
+
+export const Strategy = ({ size = 26 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" {...base}>
+    <circle cx="12" cy="12" r="8.5" />
+    <circle cx="12" cy="12" r="4.5" />
+    <circle cx="12" cy="12" r="0.9" fill="currentColor" />
+    <path d="M12 3.5V1.8M20.5 12h1.7" />
+  </svg>
+);

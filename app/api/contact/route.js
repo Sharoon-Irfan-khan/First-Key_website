@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { sendMail, INBOXES } from "@/lib/email";
+import { corporateServiceTitles } from "@/lib/corporateServices";
 
 export const runtime = "nodejs";
 
@@ -19,17 +20,39 @@ export async function POST(request) {
     );
   }
 
+  // Enquiries from /corporate-services belong to First Key Corporate Services
+  // DWC-LLC, a separate company — label them clearly so they are never mixed
+  // up with real estate leads.
+  const corporate = data.source === "corporate-services";
+  if (corporate && !corporateServiceTitles.includes(data.service)) {
+    return NextResponse.json(
+      { ok: false, error: "Please choose the service you need." },
+      { status: 400 }
+    );
+  }
+
   const result = await sendMail({
-    to: INBOXES.contact,
-    subject: `New enquiry — ${name}`,
+    to: corporate ? INBOXES.corporate : INBOXES.contact,
+    subject: corporate
+      ? `Corporate Services enquiry (${data.service}) — ${name}`
+      : `New enquiry — ${name}`,
     replyTo: email,
-    fields: {
-      Name: name,
-      Phone: phone,
-      Email: email,
-      "Interested in": data.interest,
-      Message: data.message,
-    },
+    fields: corporate
+      ? {
+          Company: "First Key Corporate Services DWC-LLC",
+          "Service required": data.service,
+          Name: name,
+          Phone: phone,
+          Email: email,
+          Message: data.message,
+        }
+      : {
+          Name: name,
+          Phone: phone,
+          Email: email,
+          "Interested in": data.interest,
+          Message: data.message,
+        },
   });
 
   // A message that wasn't delivered — for any reason, including email not being

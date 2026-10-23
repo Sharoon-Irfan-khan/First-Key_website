@@ -35,6 +35,7 @@ export function CTA({
   title = "Ready to move forward?",
   text = "Speak with a First Key broker today and let us open the right door for you.",
   image = "/images/sky-marina.jpg",
+  actions,
 }) {
   return (
     <section className="cta section">
@@ -49,12 +50,16 @@ export function CTA({
         <h2 className="h2">{title}</h2>
         <p className="lead">{text}</p>
         <div className="cta__actions">
-          <Link href="/contact" className="btn btn--light">
-            Contact Us <Arrow />
-          </Link>
-          <a href="tel:+971545011151" className="btn btn--outline-light">
-            +971 54 501 1151
-          </a>
+          {actions || (
+            <>
+              <Link href="/contact" className="btn btn--light">
+                Contact Us <Arrow />
+              </Link>
+              <a href="tel:+971545011151" className="btn btn--outline-light">
+                +971 54 501 1151
+              </a>
+            </>
+          )}
         </div>
       </div>
     </section>

@@ -6,6 +6,8 @@ import CountUp from "./CountUp";
 
 export default function Hero({
   image,
+  imageAlt = "Dubai skyline",
+  logo,
   eyebrow,
   title,
   sub,
@@ -18,7 +20,7 @@ export default function Hero({
       <div className="hero__media">
         <Image
           src={image}
-          alt="Dubai skyline"
+          alt={imageAlt}
           fill
           sizes="100vw"
           quality={75}
@@ -28,12 +30,17 @@ export default function Hero({
       </div>
       <div className="hero__wash" />
       <div className="container hero__inner">
+        {logo}
         {eyebrow && (
           <Eyebrow light>{eyebrow}</Eyebrow>
         )}
         <h1 className="display hero__title">{title}</h1>
         {sub && <p className="hero__sub">{sub}</p>}
-        {actions && (
+        {/* `actions` may be a custom set of buttons; `true` keeps the default pair. */}
+        {actions && actions !== true && (
+          <div className="hero__actions">{actions}</div>
+        )}
+        {actions === true && (
           <div className="hero__actions">
             <Link href="/developers" className="btn btn--light">
               Explore Developers <Arrow />
