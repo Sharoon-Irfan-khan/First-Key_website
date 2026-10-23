@@ -183,8 +183,8 @@ export default function CorporateServices() {
       {/* 1 — Hero */}
       <Hero
         page
-        image="/images/sky-b.jpg"
-        imageAlt="Dubai business district skyline at night"
+        image="/images/corporate/hero-glass-towers.jpg"
+        imageAlt="Looking up at glass office towers against a clear blue sky"
         logo={
           <Image
             src="/images/corporate/fkcs-logo-reversed.svg"
