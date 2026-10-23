@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { IconLinkedin, IconInstagram, WhatsApp } from "./icons";
+import { IconLinkedin, IconInstagram, IconTiktok, WhatsApp } from "./icons";
 
 export default function Footer() {
   const year = 2026;
@@ -83,6 +83,14 @@ export default function Footer() {
               rel="noreferrer"
             >
               <IconInstagram />
+            </a>
+            <a
+              href="https://www.tiktok.com/@firstkeyinternational"
+              aria-label="TikTok"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <IconTiktok />
             </a>
           </div>
         </div>

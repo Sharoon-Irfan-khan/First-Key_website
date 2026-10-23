@@ -138,3 +138,9 @@ export const IconInstagram = ({ size = 16 }) => (
     <circle cx="17.3" cy="6.7" r="0.6" fill="currentColor" />
   </svg>
 );
+
+export const IconTiktok = ({ size = 16 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M16.6 3h-3.3v12.4a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9.2a6.3 6.3 0 1 0 5.3 6.2V9.1a7.9 7.9 0 0 0 4.4 1.3V7.1a4.6 4.6 0 0 1-4.4-4.1z" />
+  </svg>
+);
