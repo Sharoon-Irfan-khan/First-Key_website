@@ -145,6 +145,12 @@ export const IconTiktok = ({ size = 16 }) => (
   </svg>
 );
 
+export const IconFacebook = ({ size = 16 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M13.5 21v-7.6h2.6l.4-3h-3V8.5c0-.9.3-1.5 1.5-1.5h1.6V4.3a21 21 0 0 0-2.3-.1c-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21z" />
+  </svg>
+);
+
 // --- Corporate Services ---
 
 export const HomeKey = ({ size = 26 }) => (

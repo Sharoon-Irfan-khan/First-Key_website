@@ -840,7 +840,7 @@ em {
   max-width: 20ch;
 }
 .hero__sub {
-  max-width: 56ch;
+  max-width: 62ch;
   margin-top: 18px;
   color: rgba(255, 255, 255, 0.82);
   font-size: clamp(1.05rem, 1.5vw, 1.28rem);
@@ -3006,19 +3006,125 @@ em {
   }
 }
 
-/* homepage pointer to the Corporate Services page */
-.cs-crosslink {
-  margin-top: 40px;
-  padding-top: 28px;
-  border-top: 1px solid var(--line);
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px 32px;
+/* homepage: five service cards (the fifth links to Corporate Services) */
+.services--five {
+  grid-template-columns: repeat(5, 1fr);
+  gap: clamp(16px, 1.6vw, 24px);
 }
-.cs-crosslink p {
-  max-width: 62ch;
+.services--five .service {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(24px, 2.2vw, 32px);
+}
+.service--cs {
+  border-top: 2px solid #054ba2;
+}
+.service--cs .service__ico {
+  color: #054ba2;
+}
+.service__link {
+  margin-top: auto;
+  padding-top: 20px;
+  color: #054ba2;
+}
+@media (max-width: 1180px) {
+  .services--five {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .services--five .service {
+    grid-column: span 2;
+  }
+  .services--five .service:nth-child(4),
+  .services--five .service:nth-child(5) {
+    grid-column: span 3;
+  }
+}
+@media (max-width: 760px) {
+  .services--five {
+    grid-template-columns: 1fr 1fr;
+  }
+  .services--five .service,
+  .services--five .service:nth-child(4) {
+    grid-column: auto;
+  }
+  .services--five .service:nth-child(5) {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 520px) {
+  .services--five {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* homepage: First Key Corporate Services introduction */
+.home-cs__logo {
+  width: clamp(170px, 18vw, 210px);
+  height: auto;
+  margin-bottom: 26px;
+}
+.home-cs__list {
+  margin-top: 26px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 20px;
+}
+.home-cs__list a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #252b36;
+  transition: color 0.25s var(--ease);
+}
+.home-cs__list a:hover {
+  color: #054ba2;
+}
+.home-cs__ico {
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--mist-200);
+  background: var(--mist);
+  color: #054ba2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.home-cs__note {
+  margin-top: 22px;
+  font-size: 0.8rem;
+  color: var(--slate);
+}
+@media (max-width: 520px) {
+  .home-cs__list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* footer: sister-company logo */
+.footer__cs {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 28px;
+  opacity: 0.85;
+  transition: opacity 0.25s var(--ease);
+}
+.footer__cs:hover {
+  opacity: 1;
+}
+.footer__cs small {
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+.footer__cs img {
+  width: 170px;
+  height: auto;
 }
 
 /* Seven nav items since Corporate Services was added: keep labels and the

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { IconLinkedin, IconInstagram, IconTiktok, WhatsApp } from "./icons";
+import { IconFacebook, IconLinkedin, IconInstagram, IconTiktok, WhatsApp } from "./icons";
 
 export default function Footer() {
   const year = 2026;
@@ -27,6 +27,20 @@ export default function Footer() {
               and lease across Dubai and the wider UAE — with clarity at every
               step.
             </p>
+            <Link
+              href="/corporate-services"
+              className="footer__cs"
+              aria-label="First Key Corporate Services"
+            >
+              <small>Sister company</small>
+              <Image
+                src="/images/corporate/fkcs-logo-reversed.svg"
+                alt="First Key Corporate Services"
+                width={180}
+                height={52}
+                unoptimized
+              />
+            </Link>
           </div>
 
           <div className="footer__col">
@@ -68,6 +82,14 @@ export default function Footer() {
           <div className="socials">
             <a href="https://wa.me/971545011151" aria-label="WhatsApp" target="_blank" rel="noreferrer">
               <WhatsApp />
+            </a>
+            <a
+              href="https://www.facebook.com/firstkeyint"
+              aria-label="Facebook"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <IconFacebook />
             </a>
             <a
               href="https://www.linkedin.com/company/firstkeyinternationalrealestate/"

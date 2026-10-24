@@ -3,8 +3,20 @@ import Link from "next/link";
 import Hero from "@/components/Hero";
 import Reveal from "@/components/Reveal";
 import { Eyebrow, SectionHead, CTA } from "@/components/ui";
-import { Arrow, Compass, Scale, Chat, Shield } from "@/components/icons";
+import {
+  Arrow,
+  Compass,
+  Scale,
+  Chat,
+  Shield,
+  Briefcase,
+  HomeKey,
+  Ledger,
+  TaxDoc,
+  Strategy,
+} from "@/components/icons";
 import { developers } from "@/lib/developers";
+import { COMPANY, corporateServices } from "@/lib/corporateServices";
 import { awards, moments } from "@/lib/gallery";
 import { AwardsShowcase, MomentsGallery } from "@/components/Gallery";
 
@@ -29,7 +41,21 @@ const services = [
     title: "Commercial",
     text: "Offices and retail units for businesses ready to grow in the UAE's key districts.",
   },
+  {
+    icon: <Briefcase />,
+    title: "Corporate Services",
+    text: "Mortgage consultancy, accounting, tax follow-up and business support through our sister company, First Key Corporate Services.",
+    href: "/corporate-services",
+  },
 ];
+
+const csIcons = {
+  mortgage: <HomeKey size={20} />,
+  ledger: <Ledger size={20} />,
+  tax: <TaxDoc size={20} />,
+  briefcase: <Briefcase size={20} />,
+  strategy: <Strategy size={20} />,
+};
 
 const reasons = [
   {
@@ -57,7 +83,7 @@ export default function Home() {
         image="/images/sky-jbr2.jpg"
         eyebrow="First Key International · Dubai"
         title="Real estate brokers in Dubai who deliver"
-        sub="We help you buy, sell, and lease property across Dubai and the wider UAE — simplifying every step, from your first viewing to the final handover."
+        sub="We help you buy, sell, and lease ready and off-plan property across Dubai and the wider UAE — simplifying every step, from your first viewing to the final handover. From our Business Bay office, a dedicated broker guides you through projects from 50+ leading developers, with honest advice and real figures at every stage."
         stats={[
           { value: "10+", label: "Years combined experience" },
           { value: "50+", label: "Leading developers" },
@@ -111,7 +137,7 @@ export default function Home() {
 
       {/* Services */}
       <section className="section bg-mist">
-        <div className="container">
+        <div className="container container-wide">
           <Reveal>
             <SectionHead
               eyebrow="Full-service across the UAE"
@@ -119,24 +145,77 @@ export default function Home() {
               lead="We cover the full range of property needs, with the same clarity on every kind of deal."
             />
           </Reveal>
-          <div className="services" style={{ marginTop: "56px" }}>
+          <div className="services services--five" style={{ marginTop: "56px" }}>
             {services.map((s, i) => (
-              <Reveal key={s.title} className="service" delay={i * 90}>
+              <Reveal
+                key={s.title}
+                className={`service ${s.href ? "service--cs" : ""}`}
+                delay={i * 90}
+              >
                 <div className="service__ico">{s.icon}</div>
                 <h3>{s.title}</h3>
                 <p>{s.text}</p>
+                {s.href && (
+                  <Link href={s.href} className="link-arrow service__link">
+                    Learn more <Arrow />
+                  </Link>
+                )}
               </Reveal>
             ))}
           </div>
-          <Reveal className="cs-crosslink">
-            <p>
-              Need mortgage, accounting, tax follow-up or business support?
-              First Key Corporate Services, a separately registered company,
-              can help.
+        </div>
+      </section>
+
+      {/* First Key Corporate Services */}
+      <section className="section home-cs">
+        <div className="container split split--media-right">
+          <Reveal className="split__media">
+            <Image
+              src="/images/corporate/hero-glass-towers.jpg"
+              alt="Looking up at glass office towers against a clear blue sky"
+              width={800}
+              height={600}
+              sizes="(max-width: 900px) 100vw, 50vw"
+              loading="lazy"
+            />
+            <div className="badge">
+              <b>5</b>
+              <span>Licensed business services</span>
+            </div>
+          </Reveal>
+          <Reveal delay={120}>
+            <Image
+              src="/images/corporate/fkcs-logo-color.svg"
+              alt="First Key Corporate Services"
+              width={210}
+              height={61}
+              className="home-cs__logo"
+              unoptimized
+            />
+            <SectionHead
+              eyebrow="Our sister company"
+              title="First Key Corporate Services"
+              lead="Beyond property, First Key Corporate Services supports companies and individuals across the UAE with financial administration, mortgage advisory and management consultancy — with the same clear communication you get from our brokers."
+            />
+            <ul className="home-cs__list">
+              {corporateServices.map((c) => (
+                <li key={c.slug}>
+                  <Link href={`/corporate-services#${c.slug}`}>
+                    <span className="home-cs__ico">{csIcons[c.icon]}</span>
+                    {c.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <p className="home-cs__note">
+              {COMPANY.legalName} is a separately registered company · Trade
+              licence no. {COMPANY.licenceNumber}
             </p>
-            <Link href="/corporate-services" className="link-arrow">
-              Explore Corporate Services <Arrow />
-            </Link>
+            <div style={{ marginTop: "32px" }}>
+              <Link href="/corporate-services" className="btn btn--primary">
+                Explore Corporate Services <Arrow />
+              </Link>
+            </div>
           </Reveal>
         </div>
       </section>
