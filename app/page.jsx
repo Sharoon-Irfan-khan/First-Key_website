@@ -14,11 +14,14 @@ import {
   Ledger,
   TaxDoc,
   Strategy,
+  YouTube,
 } from "@/components/icons";
 import { developers } from "@/lib/developers";
 import { COMPANY, corporateServices } from "@/lib/corporateServices";
 import { awards, moments } from "@/lib/gallery";
 import { AwardsShowcase, MomentsGallery } from "@/components/Gallery";
+import VideoGallery from "@/components/VideoGallery";
+import { CHANNEL_URL, getChannelVideos } from "@/lib/youtube";
 
 const services = [
   {
@@ -76,7 +79,9 @@ const reasons = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const { videos, shorts } = await getChannelVideos();
+
   return (
     <>
       <Hero
@@ -281,6 +286,32 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* YouTube channel — hidden entirely if YouTube can't be reached */}
+      {(videos.length > 0 || shorts.length > 0) && (
+        <section className="section bg-mist video-section" id="videos">
+          <div className="container awards-head">
+            <Reveal>
+              <SectionHead
+                eyebrow="First Key on YouTube"
+                title="Explore First Key in Motion"
+                lead="Discover Dubai's finest properties, market insights, and exclusive real estate experiences through our latest videos."
+              />
+            </Reveal>
+            <Reveal delay={120}>
+              <a
+                href={`${CHANNEL_URL}?sub_confirmation=1`}
+                className="btn btn--primary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <YouTube /> Subscribe on YouTube
+              </a>
+            </Reveal>
+          </div>
+          <VideoGallery videos={videos} shorts={shorts} />
+        </section>
+      )}
 
       {/* Awards & recognition */}
       <section className="section bg-navy awards-section" id="awards">

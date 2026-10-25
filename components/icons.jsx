@@ -195,3 +195,10 @@ export const Strategy = ({ size = 26 }) => (
     <path d="M12 3.5V1.8M20.5 12h1.7" />
   </svg>
 );
+
+export const YouTube = ({ size = 18 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" {...base}>
+    <rect x="2.5" y="5" width="19" height="14" rx="4" />
+    <path d="M10 9.2v5.6l4.8-2.8z" fill="currentColor" />
+  </svg>
+);

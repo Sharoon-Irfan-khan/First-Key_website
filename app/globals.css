@@ -2508,6 +2508,282 @@ em {
 }
 
 /* ============================================================
+   Explore First Key in Motion (YouTube videos + Shorts)
+   ============================================================ */
+.video-section {
+  --yt-blue: #054ba2;
+  overflow: hidden;
+}
+.vgallery {
+  margin-top: clamp(40px, 5vw, 64px);
+  display: grid;
+  /* minmax(0, …) so a rail can't stretch to its content and kill the scroll */
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(48px, 6vw, 72px);
+}
+.vrail__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.vrail__label {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  font-size: clamp(1.5rem, 2.4vw, 1.9rem);
+}
+.vrail__label span {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--slate-light);
+}
+.vrail__controls {
+  display: flex;
+  gap: 10px;
+}
+.vrail__btn {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  transition: background 0.3s var(--ease), border-color 0.3s var(--ease),
+    color 0.3s var(--ease), opacity 0.3s var(--ease);
+}
+.vrail__btn:hover:not(:disabled) {
+  background: var(--yt-blue);
+  border-color: var(--yt-blue);
+  color: #fff;
+}
+.vrail__btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.vrail__track {
+  --card-w: clamp(280px, 30vw, 400px);
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(18px, 2vw, 28px);
+  margin-top: 24px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  /* same edge alignment as the awards wall: first card on the container
+     line, the rest bleed off-screen to hint there is more */
+  padding-inline: max(var(--gutter), calc((100vw - var(--maxw)) / 2 + var(--gutter)));
+  scroll-padding-inline: max(var(--gutter), calc((100vw - var(--maxw)) / 2 + var(--gutter)));
+  padding-top: 8px;
+  padding-bottom: 12px;
+}
+.vrail--shorts .vrail__track {
+  --card-w: clamp(190px, 17vw, 236px);
+}
+.vrail__track::-webkit-scrollbar {
+  display: none;
+}
+.vcard {
+  flex: none;
+  width: var(--card-w);
+  scroll-snap-align: start;
+}
+.vcard__frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--navy-700);
+  box-shadow: var(--shadow-md);
+  transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+}
+.vrail--shorts .vcard__frame {
+  aspect-ratio: 9 / 16;
+  border-radius: 12px;
+}
+.vcard__frame img {
+  object-fit: cover;
+  transition: transform 0.9s var(--ease);
+}
+.vcard__frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: inherit;
+  pointer-events: none;
+}
+.vcard__shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(4, 30, 61, 0.55), rgba(4, 30, 61, 0) 55%);
+  transition: background 0.5s var(--ease);
+}
+.vcard__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  padding-left: 3px; /* optically centre the triangle */
+  border-radius: 50%;
+  background: var(--yt-blue);
+  color: #fff;
+  box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.18), 0 18px 40px -12px rgba(4, 30, 61, 0.7);
+  transform: translate(-50%, -50%);
+  transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease),
+    background 0.45s var(--ease);
+}
+.vrail--shorts .vcard__play {
+  width: 54px;
+  height: 54px;
+}
+.vcard__tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(4, 30, 61, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #fff;
+}
+.vcard__frame:hover,
+.vcard__frame:focus-visible {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+.vcard__frame:hover img,
+.vcard__frame:focus-visible img {
+  transform: scale(1.05);
+}
+.vcard__frame:hover .vcard__shade,
+.vcard__frame:focus-visible .vcard__shade {
+  background: linear-gradient(to top, rgba(4, 30, 61, 0.7), rgba(4, 30, 61, 0.15));
+}
+.vcard__frame:hover .vcard__play,
+.vcard__frame:focus-visible .vcard__play {
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 0 0 12px rgba(255, 255, 255, 0.22), 0 22px 46px -12px rgba(4, 30, 61, 0.8);
+}
+.vcard__text {
+  margin-top: 18px;
+  padding-inline: 2px;
+}
+.vcard__meta {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--yt-blue);
+}
+.vcard__title {
+  margin-top: 8px;
+  font-size: 1.28rem;
+  line-height: 1.25;
+  color: var(--ink);
+  /* two lines max, never spills past the card */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+.vrail--shorts .vcard__title {
+  font-size: 1.08rem;
+}
+
+/* player: reuses the lightbox shell, swaps the image for an iframe */
+.vplayer__figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* largest 16:9 box that fits beside the nav arrows and under the bar */
+  width: min(100%, calc((100dvh - 210px) * 16 / 9));
+  animation: lb-in 0.45s var(--ease);
+}
+.vplayer__figure--short {
+  width: min(100%, calc((100dvh - 210px) * 9 / 16), 420px);
+}
+.vplayer__frame {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.8);
+}
+.vplayer__figure--short .vplayer__frame {
+  aspect-ratio: 9 / 16;
+  border-radius: 14px;
+}
+.vplayer__frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.vplayer .lightbox__caption b {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.lightbox__caption .vplayer__yt {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  transition: color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.lightbox__caption .vplayer__yt:hover {
+  color: #fff;
+  border-color: #fff;
+}
+
+@media (max-width: 620px) {
+  .vrail__track {
+    --card-w: 84vw;
+  }
+  .vrail--shorts .vrail__track {
+    --card-w: 58vw;
+  }
+  /* swipe is the control on phones */
+  .vrail__controls {
+    display: none;
+  }
+  .vcard__play {
+    width: 56px;
+    height: 56px;
+  }
+  .vplayer__figure {
+    width: 100%;
+  }
+  .vplayer__figure--short {
+    width: min(100%, calc((100dvh - 260px) * 9 / 16));
+  }
+}
+
+/* ============================================================
    Lightbox
    ============================================================ */
 .lightbox {

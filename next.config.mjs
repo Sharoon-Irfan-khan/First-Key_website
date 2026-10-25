@@ -10,6 +10,8 @@ const nextConfig = {
     // browser hold optimized variants far longer than Next's 60s default.
     minimumCacheTTL: 60 * 60 * 24 * 30,
     formats: ["image/avif", "image/webp"],
+    // YouTube thumbnails for the homepage video gallery (lib/youtube.js).
+    remotePatterns: [{ protocol: "https", hostname: "i.ytimg.com", pathname: "/vi/**" }],
   },
 
   // Short ways in to the CMS. Sanity's own "Open Sanity Studio" button routes
